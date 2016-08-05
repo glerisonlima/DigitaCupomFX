@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digitacupomfx.controllers.FXMLDocumentController">
+   <top>
+      <AnchorPane prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #03A9F4;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="377.0" layoutY="9.0" text="Digita Cupom" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="354.0" prefWidth="100.0" style="-fx-background-color: #03A9F4;" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="537.0" prefWidth="100.0" stylesheets="@../css/estilo.css">
+               <children>
+                  <JFXButton fx:id="btnCupom" contentDisplay="TOP" onAction="#AbrirCupom" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Cupom">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagens/cart.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnTransacao" contentDisplay="TOP" onAction="#abrirTransacao" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Transação">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagens/basket.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnItens" contentDisplay="TOP" onAction="#abrirItens" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Itens">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagens/cart-plus.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnFinalizacao" contentDisplay="TOP" onAction="#abrirFinalizacao" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Finalização">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagens/coin.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnBackup" contentDisplay="TOP" onAction="#abrirBackup" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Backup">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagens/ic_backup.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnZerarChave" contentDisplay="TOP" onAction="#abrirZerarChave" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Zerar Chave">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagens/key-variant.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="btnSair" contentDisplay="TOP" onAction="#sair" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Sair">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagens/power.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </left>
+   <bottom>
+      <AnchorPane prefHeight="15.0" prefWidth="600.0" style="-fx-background-color: #03A9F4;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
