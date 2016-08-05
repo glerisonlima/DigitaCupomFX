@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="DigitaCupomFx.jar" size="108020" download="eager" />
+    <jar href="DigitaCupomFx.jar" size="2105040" download="eager" />
     <jar href="lib\jfoenix.jar" size="2125111" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="DigitaCupomFx" >

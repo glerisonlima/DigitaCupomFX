@@ -90,6 +90,6 @@
       <AnchorPane prefHeight="15.0" prefWidth="600.0" style="-fx-background-color: #03A9F4;" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffffff;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
