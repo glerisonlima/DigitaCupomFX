@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -76,7 +77,7 @@ public class FXMLDocumentController implements Initializable {
         FXMLLoader load = new FXMLLoader();
         load.setLocation(FXMLItensController.class.getResource("/digitacupomfx/viwes/FXMLItens.fxml"));
         this.pane.getChildren().clear();
-        this.pane.getChildren().addAll((AnchorPane) load.load());
+        this.pane.getChildren().addAll((StackPane) load.load());
     }
 
     @FXML
@@ -84,7 +85,7 @@ public class FXMLDocumentController implements Initializable {
         FXMLLoader load = new FXMLLoader();
         load.setLocation(FXMLTransacaoController.class.getResource("/digitacupomfx/viwes/FXMLTransacao.fxml"));
         this.pane.getChildren().clear();
-        this.pane.getChildren().addAll((AnchorPane) load.load());
+        this.pane.getChildren().addAll((StackPane) load.load());
     }
 
     @FXML

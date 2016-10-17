@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import digitacupomfx.DigitaCupomFx;
 import digitacupomfx.dao.ItenvdaDao;
 import digitacupomfx.entidades.Itenvda;
@@ -27,6 +29,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -34,8 +37,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
 
@@ -115,6 +122,9 @@ public class FXMLItensController implements Initializable {
     
     @FXML
     private Label lbTotalCupom;
+    
+    @FXML
+    private StackPane stackPane;
 
     @FXML
     public void teclaEnterAcrecimo(KeyEvent event) {
@@ -283,7 +293,9 @@ public class FXMLItensController implements Initializable {
     }
     
     @FXML
-    public void inserirItem(ActionEvent event) {        
+    public void inserirItem(ActionEvent event) {     
+        try{
+        if(validarCampos()){    
         Itenvda item = new Itenvda();
         item.setTxtrndat(txData.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00.000")));
         item.setTxtrnseq(txSequencial.getText());
@@ -304,7 +316,10 @@ public class FXMLItensController implements Initializable {
         
         preencherTabela(item);
         calcularCupomTabela();
-        
+        }
+        }catch(Exception e){
+            mensagemAlerta("Erro ao inserir item", "Erro: "+e.getMessage());
+        }
         
         
         
@@ -389,10 +404,53 @@ public class FXMLItensController implements Initializable {
         txSequencial.setText("");
         txVlrItem.setText("");
         txVlrUnitario.setText("");
-        cbTributacao.getSelectionModel().select(0);
+        cbTributacao.getSelectionModel().clearSelection();
         
         
         
+    }
+    
+    public void mensagemAlerta(String titulo, String mensagem){
+        Image img = new Image("digitacupomfx/imagens/alert-octagon.png");
+        JFXDialogLayout context = new JFXDialogLayout();
+        context.setHeading(new ImageView(img),new Text("               "+titulo));
+        context.setBody(new Text(mensagem));
+        JFXDialog dialog = new JFXDialog(stackPane, context, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        context.setActions(button);
+        dialog.show();
+    }
+    
+    public void mensagemConfirma(String titulo, String mensagem){
+        Image img = new Image("digitacupomfx/imagens/thumb-up.png");
+        JFXDialogLayout context = new JFXDialogLayout();
+        context.setHeading(new ImageView(img),new Text("               "+titulo));
+        context.setBody(new Text(mensagem));
+        JFXDialog dialog = new JFXDialog(stackPane, context, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        context.setActions(button);
+        dialog.show();
+    }
+
+    private boolean validarCampos() {
+        if(txAcrecimo.getText().isEmpty() | txCaixa.getText().isEmpty() | txDesconto.getText().isEmpty() |
+                txProcod.getText().isEmpty() | txQuantidade.getText().isEmpty() | txSequencial.getText().isEmpty() |
+                txVlrItem.getText().isEmpty() | txVlrUnitario.getText().isEmpty()){            
+            return false;            
+        }
+        return true;
     }
     
     

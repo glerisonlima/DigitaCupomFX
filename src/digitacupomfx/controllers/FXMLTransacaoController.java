@@ -9,6 +9,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import digitacupomfx.dao.ImpressoraDAO;
 import digitacupomfx.dao.TipoTransacaoDAO;
 import digitacupomfx.dao.TransacaoDAO;
@@ -22,12 +24,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
 
@@ -119,22 +127,23 @@ public class FXMLTransacaoController implements Initializable {
     private JFXButton btnGravarTransacao;
 
     @FXML
-    private JFXButton btnLimparTransacao;
-
-    @FXML
-    private JFXButton btnCancelarTransacao;
+    private JFXButton btnLimparCampos;    
     
     @FXML
     private Label lbNomeCliente;
     
+    @FXML
+    private AnchorPane ancorpane;
     
     @FXML
-    void cancelarTransacao(ActionEvent event) {
-
-    }
+    private StackPane stackPane;
+    
+    
 
     @FXML
     void gravarTransacao(ActionEvent event) {
+        
+        if(validarCampos()){
         try{
         TransacaoDAO dao = new TransacaoDAO();
         Transacao t = new Transacao();
@@ -180,18 +189,21 @@ public class FXMLTransacaoController implements Initializable {
         
         //Enviando objeto para cadastro no dao
         dao.cadastrar(t);
-        
+            mensagemConfirma("Cadastro de Transação", "Transação cadastrada com sucesso!");
+            limparCamposTransacao();
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao cadastrar a transacão, Erro: "+e.getMessage());
+            mensagemAlerta("Ocorreu um erro ao inserir Transação", "Erro: "+e.getMessage());
         }
-        
+        }
         
     }
 
     @FXML
-    void limparTransacao(ActionEvent event) {
-       
+    void limparCampos(ActionEvent event) {
+        limparCamposTransacao();
     }
+    
+    
     
     @FXML
     void teclaEnterSequencial(KeyEvent event) {
@@ -416,5 +428,78 @@ public class FXMLTransacaoController implements Initializable {
         
        
         
+    }
+    
+    public void mensagemAlerta(String titulo, String mensagem){
+        Image img = new Image("digitacupomfx/imagens/alert-octagon.png");
+        JFXDialogLayout context = new JFXDialogLayout();
+        context.setHeading(new ImageView(img),new Text("               "+titulo));
+        context.setBody(new Text(mensagem));
+        JFXDialog dialog = new JFXDialog(stackPane, context, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        context.setActions(button);
+        dialog.show();
+    }
+    
+    public void mensagemConfirma(String titulo, String mensagem){
+        Image img = new Image("digitacupomfx/imagens/thumb-up.png");
+        JFXDialogLayout context = new JFXDialogLayout();
+        context.setHeading(new ImageView(img),new Text("               "+titulo));
+        context.setBody(new Text(mensagem));
+        JFXDialog dialog = new JFXDialog(stackPane, context, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        context.setActions(button);
+        dialog.show();
+    }
+
+    private boolean validarCampos() {
+        
+        if(txAcrecimo.getText().isEmpty() || txCaixa.getText().isEmpty() || txCoo.getText().isEmpty() || 
+            txDesconto.getText().isEmpty() || txEcf.getText().isEmpty() ||  txLoja.getText().isEmpty() ||
+            txSequencial.getText().isEmpty() || txSerieEcf.getText().isEmpty() | txValor.getText().isEmpty() | cbImpressora.getSelectionModel().isEmpty() |
+            cbTipoTransacao.getSelectionModel().isEmpty()){
+            mensagemAlerta("Erro ao tentar inserir transação", "Erro causado provavelmente porque alguns campos estão vazio.");
+        return false;
+        }
+        return true;
+    }
+    
+    private void limparCamposTransacao(){
+        txAcrecimo.setText("");        
+        txCaixa.setText("");
+        txCoo.setText("");
+        txData.getEditor().setText("");
+        txDesconto.setText("");
+        txEcf.setText("");
+        txHora.getEditor().setText("");
+        txLoja.setText("");
+        txSequencial.setText("");
+        txSerieEcf.setText("");
+        txValor.setText("");
+        cbImpressora.getSelectionModel().clearSelection();
+        cbTipoTransacao.getSelectionModel().clearSelection();
+        txChaveSat.setText("");
+        txClicod.setText("");
+        txFuncod.setText("");
+        txNfceChave.setText("");
+        txNfceNum.setText("");
+        txNfceNumSerie.setText("");
+        txNfceProtocolo.setText("");
+        txNomeCliente.setText("");
+        txNomeFuncionario.setText("");
+        
+              
     }
 }
