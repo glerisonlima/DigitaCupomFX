@@ -57,19 +57,11 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <JFXButton fx:id="btnBackup" contentDisplay="TOP" onAction="#abrirBackup" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Backup">
+                  <JFXButton fx:id="btnUtilitarios" contentDisplay="TOP" onAction="#abrirUtilitarios" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Utilitarios">
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../imagens/ic_backup.png" />
-                           </image>
-                        </ImageView>
-                     </graphic></JFXButton>
-                  <JFXButton fx:id="btnZerarChave" contentDisplay="TOP" onAction="#abrirZerarChave" styleClass="botaoMenu" stylesheets="@../css/estilo.css" text="Zerar Chave">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../imagens/key-variant.png" />
+                              <Image url="@../imagens/tag.png" />
                            </image>
                         </ImageView>
                      </graphic></JFXButton>

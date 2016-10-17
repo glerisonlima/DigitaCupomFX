@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digitacupomfx.controllers.FXMLUtilitariosController">
+   <children>
+      <JFXButton fx:id="btnBackup" contentDisplay="TOP" layoutX="257.0" layoutY="143.0" onAction="#fazerBackup" prefHeight="136.0" prefWidth="128.0" styleClass="btn-default" stylesheets="@../css/estilo_bootstrap.css" text="Fazer Backup ">
+         <graphic>
+            <ImageView fitHeight="119.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/firebird_logo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton fx:id="btnZerarChave" contentDisplay="TOP" layoutX="415.0" layoutY="143.0" onAction="#zerarChave" prefHeight="136.0" prefWidth="128.0" styleClass="btn-success" stylesheets="@../css/estilo_bootstrap.css" text="Zerar Chave">
+         <graphic>
+            <ImageView fitHeight="119.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/key-variant%20(1).png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <Label layoutX="344.0" layoutY="29.0" text="Utilitarios">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

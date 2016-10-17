@@ -39,7 +39,7 @@ public class FXMLDocumentController implements Initializable {
     private JFXButton btnBackup;
 
     @FXML
-    private JFXButton btnZerarChave;
+    private JFXButton btnUtilitarios;
 
     @FXML
     private JFXButton btnSair;
@@ -88,9 +88,16 @@ public class FXMLDocumentController implements Initializable {
     }
 
     @FXML
-    void abrirZerarChave(ActionEvent event) throws IOException {
+    void abrirUtilitarios(ActionEvent event) throws IOException {
         FXMLLoader load = new FXMLLoader();
-        load.setLocation(FXMLZerarChaveController.class.getResource("/digitacupomfx/viwes/FXMLZerarChave.fxml"));
+        load.setLocation(FXMLUtilitariosController.class.getResource("/digitacupomfx/viwes/FXMLUtilitarios.fxml"));
+        this.pane.getChildren().clear();
+        this.pane.getChildren().addAll((AnchorPane) load.load());
+    }
+    
+    public void LimparTela(String caminho) throws IOException{
+        FXMLLoader load = new FXMLLoader();
+        load.setLocation(FXMLUtilitariosController.class.getResource(caminho));
         this.pane.getChildren().clear();
         this.pane.getChildren().addAll((AnchorPane) load.load());
     }
