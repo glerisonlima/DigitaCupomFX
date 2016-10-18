@@ -200,11 +200,14 @@ public class FXMLItensController implements Initializable {
                 txProcod.setText(p.getCodigo());
                 txVlrUnitario.setText(p.getPreco().toString());            
             }
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(null, "Produto não localizado! Erro: "+e.getMessage());
-            }
             txQuantidade.setText("1");
             txQuantidade.requestFocus();
+            }catch(Exception e){
+                txProcod.requestFocus();
+                mensagemAlerta("Produto não localizado!", "Tente novamente com um codigo de barras ou codigo principal valido. Erro: "+e.getMessage());
+                
+            }
+            
         }
     }
 
@@ -272,6 +275,8 @@ public class FXMLItensController implements Initializable {
     
     @FXML
     public void gravarItens(ActionEvent event) {
+        try{
+        if(listItens != null){
         ItenvdaDao dao = new ItenvdaDao();
         for(int i=0; i < listItens.size(); i++){
             Itenvda item = listItens.get(i);
@@ -280,22 +285,32 @@ public class FXMLItensController implements Initializable {
         }
         
         limparCampos();
+            mensagemConfirma("Inserido itens de venda", "Itens de venda inseridos com sucesso!");
+        }
+        }catch(Exception e){
+            mensagemAlerta("Erro ao tentar inserir os itens de venda", "Erro: "+e.getMessage());
+        }
     }
     
     
     @FXML
     public void removerItem(ActionEvent event) {
         Itenvda itemSelecionado = tbItens.getSelectionModel().getSelectedItem();
+        if(itemSelecionado != null){
         ObservableListItens.remove(itemSelecionado);
         listItens.remove(itemSelecionado);
         
         calcularCupomTabela();
+        }else{
+            mensagemAlerta("Problema ao tentar remover item da tabela", "Verifique se o item foi selecionado corretamente!");
+        }
     }
     
     @FXML
     public void inserirItem(ActionEvent event) {     
-        try{
         if(validarCampos()){    
+        
+        
         Itenvda item = new Itenvda();
         item.setTxtrndat(txData.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00.000")));
         item.setTxtrnseq(txSequencial.getText());
@@ -316,9 +331,17 @@ public class FXMLItensController implements Initializable {
         
         preencherTabela(item);
         calcularCupomTabela();
-        }
-        }catch(Exception e){
-            mensagemAlerta("Erro ao inserir item", "Erro: "+e.getMessage());
+        txDesconto.setText("0,00");
+        txAcrecimo.setText("0,00");
+        txProdes.setText("");
+        txQuantidade.setText("");
+        txVlrItem.setText("0,00");
+        txVlrUnitario.setText("0,00");
+        
+        txProcod.requestFocus();
+                
+        }else{
+            mensagemAlerta("Erro ao inserir item", "Verifique se os campos estão vazios!");
         }
         
         
@@ -449,8 +472,9 @@ public class FXMLItensController implements Initializable {
                 txProcod.getText().isEmpty() | txQuantidade.getText().isEmpty() | txSequencial.getText().isEmpty() |
                 txVlrItem.getText().isEmpty() | txVlrUnitario.getText().isEmpty()){            
             return false;            
-        }
+        }else{
         return true;
+        }
     }
     
     

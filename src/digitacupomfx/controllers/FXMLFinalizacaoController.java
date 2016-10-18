@@ -10,7 +10,11 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import digitacupomfx.entidades.Finalizacao;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,6 +29,11 @@ import javafx.scene.input.KeyEvent;
  * @author glerison
  */
 public class FXMLFinalizacaoController implements Initializable {
+    
+    
+    private List<Finalizacao> listFinalizacao = new ArrayList();
+    
+    private ObservableList<Finalizacao> ObservableListFinalizacao;    
     
     @FXML
     private TextField txSequencial;
@@ -69,7 +78,10 @@ public class FXMLFinalizacaoController implements Initializable {
 
     @FXML
     void inserirFinalizacao(ActionEvent event) {
-
+        Finalizacao finalizacao = new Finalizacao();
+        finalizacao.setTRNDAT(txTrndat.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00.000")));
+        finalizacao.setTRNSEQ(txSequencial.getText());
+        finalizacao.setCXANUM(txCxanum.getText());
     }
 
     @FXML
