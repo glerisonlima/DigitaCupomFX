@@ -142,26 +142,14 @@ public class ItenvdaDao {
         Produto p = new Produto();
         try {
             Connection conn = new ConnectionFatory().getConection();
-            String SQL = "select produto.procod, produto.prodesrdz,produto.proprc1,produtoaux.procodaux from produto inner join produtoaux on produto.procod = produtoaux.procod where produto.procod=?";
+            String SQL = "select produto.procod, produto.prodesrdz,produto.proprc1 from produto where produto.procod=?";
             PreparedStatement pstm = conn.prepareStatement(SQL);
             pstm.setString(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if(rs.next()){                
                 p.setCodigo(rs.getString("procod"));
-                p.setCodigoAux(rs.getString("procodaux"));
                 p.setDescricao(rs.getString("prodesrdz"));
                 p.setPreco(rs.getBigDecimal("proprc1"));        
-            }else {
-                String SQL2 = "select produto.procod, produto.prodesrdz,produto.proprc1,produtoaux.procodaux from produto inner join produtoaux on produto.procod = produtoaux.procod where produtoaux.procodaux=?";
-                PreparedStatement pstm2 = conn.prepareStatement(SQL2);
-                pstm2.setString(1, codigo);
-                ResultSet rs2 = pstm.executeQuery();
-                if(rs2.next()){                
-                    p.setCodigo(rs2.getString("procod"));
-                    p.setCodigoAux(rs2.getString("procodaux"));
-                    p.setDescricao(rs2.getString("prodesrdz"));
-                    p.setPreco(rs2.getBigDecimal("proprc1"));        
-                }
             }
             rs.close();
             pstm.close();
