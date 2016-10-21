@@ -6,10 +6,15 @@
 
 package digitacupomfx.entidades;
 
+import java.math.BigDecimal;
+
 
 public class Finalizacao {
-    String FZDCOD, FZDSEQ, AGECOD, FZDTRCCTR, TRNSEQ, CXANUM, TRNDAT;
-    double FZDCTRVAL, FZDVLR;
+    private String FZDCOD, FZDSEQ, AGECOD, FZDTRCCTR, TRNSEQ, CXANUM, TRNDAT;
+    private String FZDDES;
+    private BigDecimal FZDVLR, FZDTRO;
+    
+    
 
     public String getTRNDAT() {
         return TRNDAT;
@@ -19,11 +24,11 @@ public class Finalizacao {
         this.TRNDAT = TRNDAT;
     }
 
-    public double getFZDVLR() {
+    public BigDecimal getFZDVLR() {
         return FZDVLR;
     }
 
-    public void setFZDVLR(double FZDVLR) {
+    public void setFZDVLR(BigDecimal FZDVLR) {
         this.FZDVLR = FZDVLR;
     }
     
@@ -60,14 +65,6 @@ public class Finalizacao {
         this.FZDSEQ = FZDSEQ;
     }
 
-    public double getFZDCTRVAL() {
-        return FZDCTRVAL;
-    }
-
-    public void setFZDCTRVAL(double FZDCTRVAL) {
-        this.FZDCTRVAL = FZDCTRVAL;
-    }
-
     public String getAGECOD() {
         return AGECOD;
     }
@@ -82,6 +79,34 @@ public class Finalizacao {
 
     public void setFZDTRCCTR(String FZDTRCCTR) {
         this.FZDTRCCTR = FZDTRCCTR;
+    }
+
+    /**
+     * @return the FZDDES
+     */
+    public String getFZDDES() {
+        return FZDDES;
+    }
+
+    /**
+     * @param FZDDES the FZDDES to set
+     */
+    public void setFZDDES(String FZDDES) {
+        this.FZDDES = FZDDES;
+    }
+
+    /**
+     * @return the FZDTRO
+     */
+    public BigDecimal getFZDTRO() {
+        return FZDTRO;
+    }
+
+    /**
+     * @param FZDTRO the FZDTRO to set
+     */
+    public void setFZDTRO(BigDecimal FZDTRO) {
+        this.FZDTRO = FZDTRO;
     }
     
     
