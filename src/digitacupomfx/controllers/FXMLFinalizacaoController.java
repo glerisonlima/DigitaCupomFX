@@ -8,6 +8,9 @@ package digitacupomfx.controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import digitacupomfx.dao.FinalizacaoDAO;
 import digitacupomfx.dao.FinalizadoraDAO;
 import digitacupomfx.entidades.Finalizacao;
 import digitacupomfx.entidades.Finalizadora;
@@ -22,6 +25,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -29,8 +33,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -44,6 +52,9 @@ public class FXMLFinalizacaoController implements Initializable {
     private List<Finalizacao> listFinalizacao = new ArrayList();
     
     private ObservableList<Finalizacao> ObservableListFinalizacao;    
+    
+    @FXML
+    private StackPane stackPane;
     
     @FXML
     private TextField txSequencial;
@@ -95,11 +106,35 @@ public class FXMLFinalizacaoController implements Initializable {
 
     @FXML
     void gravarFinalizacao(ActionEvent event) {
-
+        try{
+        if(listFinalizacao != null){
+        FinalizacaoDAO dao = new FinalizacaoDAO();
+        for(int i=0; i < listFinalizacao.size(); i++){
+            Finalizacao fin = listFinalizacao.get(i);
+            dao.insereFinalizacao(fin);
+        }
+        
+        limparCampos();
+            mensagemConfirma("Inserido itens de venda", "Itens de venda inseridos com sucesso!");
+        }
+        }catch(Exception e){
+            mensagemAlerta("Erro ao tentar inserir os itens de venda", "Erro: "+e.getMessage());
+        }
+    }
+    
+    public void calcularFinalizacaoTabela(){
+        BigDecimal total = new BigDecimal("0.00");
+        for (int i=0; i<ObservableListFinalizacao.size();i++){
+        BigDecimal coluna = new BigDecimal(tbFinalizacao.getVisibleLeafColumn(2).getCellObservableValue(i).getValue().toString());
+        total = total.add(coluna);
+        }
+        System.out.println("Total: "+total);
+        lbTotalFinalizacao.setText(String.valueOf(total).replace(".", ","));
     }
 
     @FXML
     void inserirFinalizacao(ActionEvent event) {
+        if(camposVaziosFinalizacao()){
         Finalizacao finalizacao = new Finalizacao();
         finalizacao.setTRNDAT(txTrndat.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00.000")));
         finalizacao.setTRNSEQ(txSequencial.getText());
@@ -111,11 +146,23 @@ public class FXMLFinalizacaoController implements Initializable {
         finalizacao.setFZDTRO(new BigDecimal(txTroco.getText().replace(",", ".")));
         
         preencherTabela(finalizacao);
+        calcularFinalizacaoTabela();
+        }else{
+            mensagemAlerta("Erro ao inserir finalização", "verifique se os campos estão preenchidos corretamente!");
+        }
     }
 
     @FXML
     void removerFinalizacao(ActionEvent event) {
-
+        Finalizacao finalizacaoSelecionado = tbFinalizacao.getSelectionModel().getSelectedItem();
+        if(finalizacaoSelecionado != null){
+        ObservableListFinalizacao.remove(finalizacaoSelecionado);
+        listFinalizacao.remove(finalizacaoSelecionado);
+        
+        calcularFinalizacaoTabela();
+        }else{
+            mensagemAlerta("Problema ao tentar remover item da tabela", "Verifique se o item foi selecionado corretamente!");
+        }
     }
 
     @FXML
@@ -197,6 +244,61 @@ public class FXMLFinalizacaoController implements Initializable {
         List<Finalizadora> listFinalizadora = dao.listarFinalizadora();
         for (Finalizadora finalizadora : listFinalizadora) {
             cbFinalizadora.getItems().add(finalizadora.getFzdcod()+"-"+finalizadora.getFzddes());
+        }
+    }
+    
+    public void mensagemAlerta(String titulo, String mensagem){
+        Image img = new Image("digitacupomfx/imagens/alert-octagon.png");
+        JFXDialogLayout context = new JFXDialogLayout();
+        context.setHeading(new ImageView(img),new Text("               "+titulo));
+        context.setBody(new Text(mensagem));
+        JFXDialog dialog = new JFXDialog(stackPane, context, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        context.setActions(button);
+        dialog.show();
+    }
+    
+    public void mensagemConfirma(String titulo, String mensagem){
+        Image img = new Image("digitacupomfx/imagens/thumb-up.png");
+        JFXDialogLayout context = new JFXDialogLayout();
+        context.setHeading(new ImageView(img),new Text("               "+titulo));
+        context.setBody(new Text(mensagem));
+        JFXDialog dialog = new JFXDialog(stackPane, context, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("OK");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });
+        context.setActions(button);
+        dialog.show();
+    }
+
+    private void limparCampos() {
+        txSequencial.setText("");
+        txCxanum.setText("");
+        txSeqFinalizadora.setText("");
+        txTroco.setText("0,00");
+        txVlrRecebido.setText("0,00");
+        cbFinalizadora.getSelectionModel().clearSelection();
+        for (int i=0; i<=listFinalizacao.size();i++){
+            listFinalizacao.remove(i);
+            ObservableListFinalizacao.remove(i);
+        }
+    }
+
+    private boolean camposVaziosFinalizacao() {
+        if(txCxanum.getText().isEmpty() | txSequencial.getText().isEmpty() |txSeqFinalizadora.getText().isEmpty() | txVlrRecebido.getText().isEmpty() | cbFinalizadora.getSelectionModel().isEmpty()){
+            return false;
+        }else{
+            return true;
         }
     }
     

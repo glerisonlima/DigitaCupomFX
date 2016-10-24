@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digitacupomfx.controllers.FXMLCupomController">
+<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digitacupomfx.controllers.FXMLCupomController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="800.0">
          <children>
@@ -190,8 +190,8 @@
                               <Label layoutX="23.0" layoutY="227.0" text="Valor Item" />
                               <JFXComboBox fx:id="cbItemTributacao" layoutX="142.0" layoutY="246.0" prefHeight="25.0" prefWidth="74.0" />
                               <JFXCheckBox fx:id="ckItemCancelado" layoutX="13.0" layoutY="277.0" text="Item cancelado" />
-                              <JFXButton fx:id="btnInserirItem" buttonType="RAISED" layoutX="21.0" layoutY="309.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Item" />
-                              <JFXButton fx:id="btnRemoverItem" layoutX="21.0" layoutY="359.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Item" />
+                              <JFXButton fx:id="btnInserirItem" buttonType="RAISED" layoutX="21.0" layoutY="309.0" onAction="#inserirItem" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Item" />
+                              <JFXButton fx:id="btnRemoverItem" layoutX="21.0" layoutY="359.0" onAction="#removerItem" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Item" />
                               <TableView fx:id="tbItens" layoutX="226.0" layoutY="48.0" prefHeight="446.0" prefWidth="569.0">
                                  <columns>
                                     <TableColumn fx:id="procutoCol" prefWidth="111.0" text="Produto" />
@@ -224,8 +224,8 @@
                               <JFXComboBox fx:id="cbFinFinalizadora" layoutX="22.0" layoutY="96.0" onKeyPressed="#teclaEnterFinComboFinalizadora" prefHeight="25.0" prefWidth="195.0" promptText="Finalizadora" />
                               <TextField fx:id="txFinVlrRecebido" layoutX="24.0" layoutY="155.0" onKeyPressed="#teclaEnterFinVlrRecebido" prefHeight="25.0" prefWidth="195.0" />
                               <Label layoutX="26.0" layoutY="135.0" text="Valor Recebido" />
-                              <JFXButton fx:id="btnInserirFinalizadora" buttonType="RAISED" layoutX="25.0" layoutY="246.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Finalizadora" />
-                              <JFXButton fx:id="btnRemoverFinalizadora" layoutX="25.0" layoutY="296.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Finalizadora" />
+                              <JFXButton fx:id="btnInserirFinalizadora" buttonType="RAISED" layoutX="25.0" layoutY="246.0" onAction="#inserirFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Finalizadora" />
+                              <JFXButton fx:id="btnRemoverFinalizadora" layoutX="25.0" layoutY="296.0" onAction="#removerFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Finalizadora" />
                               <TextField fx:id="txFinTroco" layoutX="24.0" layoutY="208.0" onKeyPressed="#teclaEnterFinTroco" prefHeight="25.0" prefWidth="195.0" />
                               <Label layoutX="26.0" layoutY="188.0" text="Troco" />
                               <TableView fx:id="tbFinalizacao" layoutX="230.0" layoutY="57.0" prefHeight="437.0" prefWidth="562.0">
@@ -236,7 +236,7 @@
                                     <TableColumn fx:id="troco" prefWidth="84.0" text="Troco" />
                                 </columns>
                               </TableView>
-                              <JFXButton fx:id="btnGravarCupom" buttonType="RAISED" layoutX="232.0" layoutY="12.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Gravar Cupom">
+                              <JFXButton fx:id="btnGravarCupom" buttonType="RAISED" layoutX="232.0" layoutY="12.0" onAction="#gravarCupom" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Gravar Cupom">
                                  <opaqueInsets>
                                     <Insets right="5.0" />
                                  </opaqueInsets>

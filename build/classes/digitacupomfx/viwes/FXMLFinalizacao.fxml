@@ -22,7 +22,7 @@
             <Label layoutX="25.0" layoutY="93.0" text="Sequencial" />
             <TextField fx:id="txCxanum" layoutX="23.0" layoutY="169.0" onKeyPressed="#teclaEnterCxanum" prefHeight="25.0" prefWidth="195.0" promptText="CXANUM" />
             <Label layoutX="25.0" layoutY="149.0" text="n° Caixa" />
-            <TextField fx:id="txSeqFinalizadora" layoutX="23.0" layoutY="225.0" onKeyPressed="#teclaEnterSeqFinalizadora" prefHeight="25.0" prefWidth="195.0" promptText="FZDSEQ" />
+            <TextField fx:id="txSeqFinalizadora" layoutX="23.0" layoutY="225.0" onKeyPressed="#teclaEnterSeqFinalizadora" prefHeight="25.0" prefWidth="195.0" />
             <Label layoutX="25.0" layoutY="205.0" text="Seq. Finalizadora" />
             <JFXComboBox fx:id="cbFinalizadora" layoutX="22.0" layoutY="262.0" prefHeight="25.0" prefWidth="195.0" promptText="Finalizadora" />
             <TextField fx:id="txVlrRecebido" layoutX="24.0" layoutY="321.0" onKeyPressed="#teclaEnterValorRecebido" prefHeight="25.0" prefWidth="195.0" />

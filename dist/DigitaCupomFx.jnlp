@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="DigitaCupomFx.jar" size="3419511" download="eager" />
+    <jar href="DigitaCupomFx.jar" size="3503509" download="eager" />
     <jar href="lib\commons-lang3-3.3.2.jar" size="412740" download="eager" />
     <jar href="lib\jaybird-full-2.2.10.jar" size="920066" download="eager" />
     <jar href="lib\jfoenix.jar" size="2125111" download="eager" />

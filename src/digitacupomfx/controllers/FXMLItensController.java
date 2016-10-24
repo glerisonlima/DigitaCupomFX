@@ -242,7 +242,7 @@ public class FXMLItensController implements Initializable {
             System.out.println(e.getMessage());
         }
         return new BigDecimal(textoValor.replace(",", "."));
-        }
+    }
     
     
     public void teclaEnterSequencial(KeyEvent event) {
