@@ -9,52 +9,46 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digitacupomfx.controllers.FXMLFinalizacaoController">
+<AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digitacupomfx.controllers.FXMLFinalizacaoController">
    <children>
-      <AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="800.0">
-         <children>
-            <TextField fx:id="txSequencial" layoutX="23.0" layoutY="113.0" onKeyPressed="#teclaEnterSequencial" prefHeight="25.0" prefWidth="195.0" promptText="TRNSEQ" />
-            <JFXDatePicker fx:id="txTrndat" defaultColor="#03a9f4" layoutX="23.0" layoutY="60.0" prefHeight="31.0" prefWidth="195.0" />
-            <Label layoutX="25.0" layoutY="93.0" text="Sequencial" />
-            <TextField fx:id="txCxanum" layoutX="23.0" layoutY="169.0" onKeyPressed="#teclaEnterCxanum" prefHeight="25.0" prefWidth="195.0" promptText="CXANUM" />
-            <Label layoutX="25.0" layoutY="149.0" text="n° Caixa" />
-            <TextField fx:id="txSeqFinalizadora" layoutX="23.0" layoutY="225.0" onKeyPressed="#teclaEnterSeqFinalizadora" prefHeight="25.0" prefWidth="195.0" promptText="FZDSEQ" />
-            <Label layoutX="25.0" layoutY="205.0" text="Seq. Finalizadora" />
-            <JFXComboBox fx:id="cbFinalizadora" layoutX="22.0" layoutY="262.0" prefHeight="25.0" prefWidth="195.0" promptText="Finalizadora" />
-            <TextField fx:id="txVlrRecebido" layoutX="24.0" layoutY="321.0" onKeyPressed="#teclaEnterValorRecebido" prefHeight="25.0" prefWidth="195.0" />
-            <Label layoutX="26.0" layoutY="301.0" text="Valor Recebido" />
-            <JFXButton fx:id="btnInserirFinalizacao" buttonType="RAISED" layoutX="25.0" layoutY="412.0" onAction="#inserirFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Finalizadora" />
-            <JFXButton fx:id="btnRemoverFinalizacao" layoutX="25.0" layoutY="462.0" onAction="#removerFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Finalizadora" />
-            <TextField fx:id="txTroco" layoutX="24.0" layoutY="374.0" onKeyPressed="#teclaEnterTroco" prefHeight="25.0" prefWidth="195.0" />
-            <Label layoutX="26.0" layoutY="354.0" text="Troco" />
-            <TableView fx:id="tbFinalizacao" layoutX="230.0" layoutY="114.0" prefHeight="385.0" prefWidth="562.0">
-              <columns>
-                <TableColumn fx:id="seq" prefWidth="64.0" text="Seq" />
-                <TableColumn fx:id="finalizadora" prefWidth="335.0" text="Finalizadora" />
-                  <TableColumn fx:id="recebido" minWidth="0.0" prefWidth="78.0" text="Recebido" />
-                  <TableColumn fx:id="troco" prefWidth="84.0" text="Troco" />
-              </columns>
-            </TableView>
-            <JFXButton fx:id="btnGravarFinalização" buttonType="RAISED" layoutX="232.0" layoutY="69.0" onAction="#gravarFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Gravar Finalização">
-               <opaqueInsets>
-                  <Insets right="5.0" />
-               </opaqueInsets>
-            </JFXButton>
-            <Label layoutX="526.0" layoutY="83.0" text="Total Finalização: ">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbTotalFinalizacao" layoutX="640.0" layoutY="61.0" prefHeight="53.0" prefWidth="150.0" text="0,00">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
+      <TextField fx:id="txSequencial" layoutX="23.0" layoutY="113.0" onKeyPressed="#teclaEnterSequencial" prefHeight="25.0" prefWidth="195.0" promptText="TRNSEQ" />
+      <JFXDatePicker fx:id="txTrndat" layoutX="23.0" layoutY="60.0" prefHeight="31.0" prefWidth="195.0" />
+      <Label layoutX="25.0" layoutY="93.0" text="Sequencial" />
+      <TextField fx:id="txCxanum" layoutX="23.0" layoutY="169.0" onKeyPressed="#teclaEnterCxanum" prefHeight="25.0" prefWidth="195.0" promptText="CXANUM" />
+      <Label layoutX="25.0" layoutY="149.0" text="n° Caixa" />
+      <TextField fx:id="txSeqFinalizadora" layoutX="23.0" layoutY="225.0" onKeyPressed="#teclaEnterSeqFinalizadora" prefHeight="25.0" prefWidth="195.0" />
+      <Label layoutX="25.0" layoutY="205.0" text="Seq. Finalizadora" />
+      <JFXComboBox fx:id="cbFinalizadora" layoutX="22.0" layoutY="262.0" prefHeight="25.0" prefWidth="195.0" promptText="Finalizadora" />
+      <TextField fx:id="txVlrRecebido" layoutX="24.0" layoutY="321.0" onKeyPressed="#teclaEnterValorRecebido" prefHeight="25.0" prefWidth="195.0" />
+      <Label layoutX="26.0" layoutY="301.0" text="Valor Recebido" />
+      <JFXButton fx:id="btnInserirFinalizacao" buttonType="RAISED" layoutX="25.0" layoutY="412.0" onAction="#inserirFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Finalizadora" />
+      <JFXButton fx:id="btnRemoverFinalizacao" layoutX="25.0" layoutY="462.0" onAction="#removerFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Finalizadora" />
+      <TextField fx:id="txTroco" layoutX="24.0" layoutY="374.0" onKeyPressed="#teclaEnterTroco" prefHeight="25.0" prefWidth="195.0" />
+      <Label layoutX="26.0" layoutY="354.0" text="Troco" />
+      <TableView fx:id="tbFinalizacao" layoutX="230.0" layoutY="114.0" prefHeight="385.0" prefWidth="562.0">
+        <columns>
+          <TableColumn fx:id="seq" prefWidth="64.0" text="Seq" />
+          <TableColumn fx:id="finalizadora" prefWidth="335.0" text="Finalizadora" />
+            <TableColumn fx:id="recebido" minWidth="0.0" prefWidth="78.0" text="Recebido" />
+            <TableColumn fx:id="troco" prefWidth="84.0" text="Troco" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btnGravarFinalização" buttonType="RAISED" layoutX="232.0" layoutY="69.0" onAction="#gravarFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Gravar Finalização">
+         <opaqueInsets>
+            <Insets right="5.0" />
+         </opaqueInsets>
+      </JFXButton>
+      <Label layoutX="526.0" layoutY="83.0" text="Total Finalização: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbTotalFinalizacao" layoutX="640.0" layoutY="61.0" prefHeight="53.0" prefWidth="150.0" text="0,00">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
-</StackPane>
+</AnchorPane>

@@ -424,9 +424,7 @@ public class FXMLTransacaoController implements Initializable {
         for (int i=0; i < lista.size(); i++){
             cbTipoTransacao.getItems().add(lista.get(i).getTptrcod()+" - "+lista.get(i).getTptrdes());           
             
-        }
-        
-       
+        }    
         
     }
     

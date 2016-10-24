@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXDatePicker fx:id="txData" defaultColor="#03a9f4" layoutX="14.0" layoutY="9.0" prefHeight="31.0" prefWidth="150.0" promptText="Data Venda" />
+      <TextField fx:id="txSequencial" layoutX="21.0" layoutY="64.0" prefHeight="25.0" prefWidth="195.0" promptText="TRNSEQ" />
+      <Label layoutX="21.0" layoutY="44.0" text="Sequencial" />
+      <TextField fx:id="txCaixa" layoutX="21.0" layoutY="115.0" prefHeight="25.0" prefWidth="195.0" promptText="CXANUM" />
+      <Label layoutX="21.0" layoutY="96.0" text="n° Caixa" />
+      <TextField fx:id="txProcod" layoutX="21.0" layoutY="165.0" prefHeight="25.0" prefWidth="195.0" promptText="PROCOD" />
+      <Label layoutX="21.0" layoutY="146.0" text="Cod Produto" />
+      <TextField fx:id="txProdes" layoutX="21.0" layoutY="214.0" prefHeight="25.0" prefWidth="195.0" promptText="PRODES" />
+      <Label layoutX="21.0" layoutY="195.0" text="Descrição" />
+      <TextField fx:id="txQuantidade" layoutX="21.0" layoutY="263.0" prefHeight="25.0" prefWidth="109.0" promptText="Fracionado Ex:1.5" />
+      <Label layoutX="21.0" layoutY="244.0" text="Quantidade" />
+      <TextField fx:id="txVlrUnitario" layoutX="142.0" layoutY="263.0" prefHeight="25.0" prefWidth="74.0" promptText="ITVVLRUNI" />
+      <Label layoutX="140.0" layoutY="244.0" text="Valor Unitario" />
+      <TextField fx:id="txDesconto" layoutX="22.0" layoutY="313.0" prefHeight="25.0" prefWidth="109.0" promptText="ITVVLRACR" />
+      <Label layoutX="22.0" layoutY="294.0" text="Desconto" />
+      <TextField fx:id="txAcrecimo" layoutX="142.0" layoutY="314.0" prefHeight="25.0" prefWidth="74.0" promptText="ITVVLRDCN" />
+      <Label layoutX="142.0" layoutY="294.0" text="Acrecimo" />
+      <TextField fx:id="txVlrItem" layoutX="23.0" layoutY="362.0" prefHeight="25.0" prefWidth="109.0" promptText="ITVVLRTOT" />
+      <Label layoutX="23.0" layoutY="343.0" text="Valor Item" />
+      <JFXComboBox fx:id="cbTributacao" layoutX="142.0" layoutY="362.0" prefHeight="25.0" prefWidth="74.0" />
+      <JFXCheckBox fx:id="ckItemCancelado" layoutX="13.0" layoutY="393.0" text="Item cancelado" />
+      <JFXButton fx:id="btnInserirItem" buttonType="RAISED" layoutX="21.0" layoutY="425.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Item" />
+      <JFXButton fx:id="btnRemoverItem" layoutX="21.0" layoutY="475.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Item" />
+      <TableView fx:id="tbItens" layoutX="226.0" layoutY="63.0" prefHeight="446.0" prefWidth="569.0">
+         <columns>
+            <TableColumn fx:id="procutoCol" prefWidth="111.0" text="Produto" />
+            <TableColumn fx:id="descricaoCol" prefWidth="266.0" text="Descrição" />
+            <TableColumn fx:id="valorUniCol" prefWidth="60.0" text="Valor Un" />
+            <TableColumn fx:id="quantidadeCol" prefWidth="50.0" text="Quant." />
+            <TableColumn fx:id="totalCol" prefWidth="81.0" text="Total" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="btnGravarItens" buttonType="RAISED" layoutX="226.0" layoutY="19.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Gravar Itens">
+         <opaqueInsets>
+            <Insets right="5.0" />
+         </opaqueInsets>
+      </JFXButton>
+      <Label layoutX="544.0" layoutY="34.0" text="Total Cupom: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbTotalCupom" layoutX="644.0" layoutY="12.0" prefHeight="53.0" prefWidth="150.0" text="0,00">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -4,8 +4,6 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
-<?import java.lang.String?>
-<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -14,267 +12,252 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digitacupomfx.controllers.FXMLCupomController">
    <children>
-      <TabPane prefHeight="535.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Transação">
-               <content>
-                  <AnchorPane id="AnchorPane" accessibleRole="CHECK_BOX" prefHeight="535.0" prefWidth="800.0" style="-fx-background-color: ffffff;">
-                     <children>
-                        <JFXDatePicker fx:id="txData" defaultColor="#03a9f4" layoutX="4.0" layoutY="24.0" prefHeight="31.0" prefWidth="150.0" promptText="Data Venda" />
-                        <JFXDatePicker fx:id="txHora" defaultColor="#03a9f4" layoutX="169.0" layoutY="24.0" prefHeight="31.0" prefWidth="120.0" promptText="Hora Venda" showTime="true" />
-                        <GridPane layoutX="10.0" layoutY="64.0" prefHeight="243.0" prefWidth="270.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="94.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="176.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="800.0">
+         <children>
+            <TabPane fx:id="tabPane" prefHeight="535.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="tabTansacao" text="Transação">
+                     <content>
+                        <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0">
                            <children>
-                              <Label text="cod. Cliente" GridPane.rowIndex="5" />
-                              <TextField fx:id="txClicod" onKeyPressed="#teclaEnterCliente" prefHeight="22.0" prefWidth="135.0" promptText="CLICOD" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <TextField fx:id="txFuncod" onKeyPressed="#teclaEnterFuncionario" prefHeight="25.0" prefWidth="187.0" promptText="FUNCOD" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <TextField fx:id="txSequencial" onKeyPressed="#teclaEnterSequencial" prefHeight="25.0" prefWidth="187.0" promptText="TRNSEQ" GridPane.columnIndex="1" />
-                              <Label text="Sequencial" />
-                              <TextField fx:id="txCaixa" onKeyPressed="#teclaEnterCaixa" prefHeight="25.0" prefWidth="187.0" promptText="CXANUM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField fx:id="txCoo" onKeyPressed="#teclaEnterCoo" prefHeight="25.0" prefWidth="187.0" promptText="TRNSEQEQP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label text="COO Cupom" GridPane.rowIndex="2" />
-                              <Label text="n° Caixa" GridPane.rowIndex="1" />
-                              <Label text="n° Loja" GridPane.rowIndex="3" />
-                              <TextField fx:id="txLoja" onKeyPressed="#teclaEnterLoja" prefHeight="25.0" prefWidth="187.0" promptText="LOJCOD" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label text="n° ECF" GridPane.rowIndex="4" />
-                              <TextField fx:id="txEcf" onKeyPressed="#teclaEnterEcf" prefHeight="25.0" prefWidth="187.0" promptText="CXANUMEQP" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Label text="cod. Funcionário" GridPane.rowIndex="6" />
-                              <Label layoutX="10.0" layoutY="196.0" text="Serie ECF" GridPane.rowIndex="7" />
-                              <TextField fx:id="txSerieEcf" layoutX="104.0" layoutY="192.0" onKeyPressed="#teclaEnterSerieEcf" prefHeight="25.0" prefWidth="187.0" promptText="TRNSEREQP" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                           </children>
-                        </GridPane>
-                        <GridPane layoutX="260.0" layoutY="214.0" prefHeight="58.0" prefWidth="516.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="70.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="446.0" minWidth="10.0" prefWidth="446.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <Label fx:id="lbNomeCliente" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="63.0" text="Nome" textAlignment="RIGHT">
-                                 <padding>
-                                    <Insets left="30.0" />
-                                 </padding>
-                              </Label>
-                              <Label text="Nome" GridPane.rowIndex="1">
-                                 <padding>
-                                    <Insets left="30.0" />
-                                 </padding>
-                              </Label>
-                              <TextField fx:id="txNomeCliente" prefHeight="25.0" prefWidth="449.0" GridPane.columnIndex="1" />
-                              <TextField fx:id="txNomeFuncionario" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                           </children>
-                        </GridPane>
-                        <JFXComboBox fx:id="cbImpressora" layoutX="329.0" layoutY="173.0" prefHeight="25.0" prefWidth="244.0" promptText="Selecione a Impressora" />
-                        <JFXComboBox fx:id="cbTipoTransacao" layoutX="588.0" layoutY="173.0" prefHeight="25.0" prefWidth="189.0" promptText="Selecione o Tipo Transação" />
-                        <TitledPane expanded="false" layoutX="291.0" layoutY="103.0" prefHeight="72.0" prefWidth="272.0" text="Cupom Fiscal Eletronico (CF-e)">
-                           <content>
-                              <GridPane prefHeight="55.0" prefWidth="266.0">
+                              <JFXDatePicker fx:id="txTrnData" defaultColor="#03a9f4" layoutX="14.0" layoutY="34.0" prefHeight="31.0" prefWidth="150.0" promptText="Data Venda" />
+                              <JFXDatePicker fx:id="txTrnHora" defaultColor="#03a9f4" layoutX="179.0" layoutY="34.0" prefHeight="31.0" prefWidth="120.0" promptText="Hora Venda" showTime="true" />
+                              <GridPane layoutX="20.0" layoutY="74.0" prefHeight="243.0" prefWidth="270.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="64.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="186.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="94.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="182.0" minWidth="10.0" prefWidth="176.0" />
                                  </columnConstraints>
                                  <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label text="SAT">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="Chave CF-e" GridPane.rowIndex="1" />
-                                    <TextField fx:id="txChaveSat" onKeyPressed="#teclaEnterChaveCfe" prefHeight="25.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="cod. Cliente" GridPane.rowIndex="5" />
+                                    <TextField fx:id="txTrnClicod" onKeyPressed="#teclaEnterTrnClicod" prefHeight="22.0" prefWidth="135.0" promptText="CLICOD" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <TextField fx:id="txTrnFuncod" onKeyPressed="#teclaEnterTrnFuncod" prefHeight="25.0" prefWidth="187.0" promptText="FUNCOD" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <TextField fx:id="txTrnSequencial" onKeyPressed="#teclaEnterTrnSequencial" prefHeight="25.0" prefWidth="187.0" promptText="TRNSEQ" GridPane.columnIndex="1" />
+                                    <Label text="Sequencial" />
+                                    <TextField fx:id="txTrnCaixa" onKeyPressed="#teclaEnterTrnCaixa" prefHeight="25.0" prefWidth="187.0" promptText="CXANUM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="txTrnCoo" onKeyPressed="#teclaEnterTrnCoo" prefHeight="25.0" prefWidth="187.0" promptText="TRNSEQEQP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="COO Cupom" GridPane.rowIndex="2" />
+                                    <Label text="n° Caixa" GridPane.rowIndex="1" />
+                                    <Label text="n° Loja" GridPane.rowIndex="3" />
+                                    <TextField fx:id="txTrnLoja" onKeyPressed="#teclaEnterTrnLoja" prefHeight="25.0" prefWidth="187.0" promptText="LOJCOD" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="n° ECF" GridPane.rowIndex="4" />
+                                    <TextField fx:id="txTrnEcf" onKeyPressed="#teclaEnterTrnEcf" prefHeight="25.0" prefWidth="187.0" promptText="CXANUMEQP" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="cod. Funcionário" GridPane.rowIndex="6" />
+                                    <Label layoutX="10.0" layoutY="196.0" text="Serie ECF" GridPane.rowIndex="7" />
+                                    <TextField fx:id="txTrnSerieEcf" layoutX="104.0" layoutY="192.0" onKeyPressed="#teclaEnterTrnSerieEcf" prefHeight="25.0" prefWidth="187.0" promptText="TRNSEREQP" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                  </children>
                               </GridPane>
-                           </content>
-                        </TitledPane>
-                        <TitledPane expanded="false" layoutX="291.0" layoutY="68.0" text="Nota Fiscal Eletronica (NFC-e)">
-                           <content>
-                              <GridPane prefHeight="157.0" prefWidth="270.0">
+                              <GridPane layoutX="270.0" layoutY="224.0" prefHeight="58.0" prefWidth="516.0">
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="92.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="178.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="70.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="446.0" minWidth="10.0" prefWidth="446.0" />
                                  </columnConstraints>
                                  <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Label text="N° NFC-e" GridPane.rowIndex="1" />
-                                    <Label text="Chave NFC-e" GridPane.rowIndex="2" />
-                                    <Label text="Protocolo" GridPane.rowIndex="3" />
-                                    <TextField fx:id="txNfceNum" onKeyPressed="#teclaEnterNumNfce" promptText="TRNNFCENUM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField fx:id="txNfceChave" onKeyPressed="#teclaEnterChaveNfce" promptText="TRNNFCECHVNFE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="txNfceProtocolo" onKeyPressed="#teclaEnterProtocoloNfce" promptText="TRNNFCENUMPROT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label layoutX="10.0" layoutY="62.0" text="N° Série" GridPane.rowIndex="4" />
-                                    <TextField fx:id="txNfceNumSerie" layoutX="102.0" layoutY="58.0" onKeyPressed="#teclaEnterNumSerieNfce" promptText="TRNNFCESER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <Label text="NFC-e">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
+                                    <Label fx:id="lbNomeCliente" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="63.0" text="Nome" textAlignment="RIGHT">
+                                       <padding>
+                                          <Insets left="30.0" />
+                                       </padding>
                                     </Label>
+                                    <Label text="Nome" GridPane.rowIndex="1">
+                                       <padding>
+                                          <Insets left="30.0" />
+                                       </padding>
+                                    </Label>
+                                    <TextField fx:id="txNomeCliente" prefHeight="25.0" prefWidth="449.0" GridPane.columnIndex="1" />
+                                    <TextField fx:id="txNomeFuncionario" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
-                           </content>
-                        </TitledPane>
-                        <JFXCheckBox fx:id="rdLogVarejo" layoutX="585.0" layoutY="64.0" text="Envia Para Varejo Facil" />
-                        <JFXCheckBox fx:id="rdLogMilenio" layoutX="585.0" layoutY="103.0" text="Envia Para Milenio" />
-                        <JFXCheckBox fx:id="rdMovEstoque" layoutX="585.0" layoutY="144.0" selected="true" text="Atualiza Estoque" />
-                        <Label layoutX="292.0" layoutY="282.0" text="Valor" />
-                        <TextField fx:id="txValor" layoutX="329.0" layoutY="278.0" onKeyPressed="#teclaEnterValor" prefHeight="25.0" prefWidth="95.0" promptText="TRNVLR" />
-                        <Label layoutX="442.0" layoutY="282.0" text="Desconto" />
-                        <TextField fx:id="txDesconto" layoutX="502.0" layoutY="278.0" onKeyPressed="#teclaEnterDesconto" prefHeight="25.0" prefWidth="95.0" promptText="TRNDCN" />
-                        <Label layoutX="622.0" layoutY="282.0" text="Acrecimo" />
-                        <TextField fx:id="txAcrecimo" layoutX="681.0" layoutY="278.0" onKeyPressed="#teclaEnterAcrecimo" prefHeight="25.0" prefWidth="95.0" promptText="TRNACR" />
-                        <JFXButton fx:id="btnGravarTransacao" buttonType="RAISED" layoutX="9.0" layoutY="344.0" onAction="#gravarTransacao" prefHeight="34.0" prefWidth="120.0" text="Gravar">
-                           <stylesheets>
-                              <URL value="@../css/estilo_bootstrap.css" />
-                              <URL value="@../css/estilo.css" />
-                           </stylesheets>
-                           <styleClass>
-                              <String fx:value="btn-primary" />
-                              <String fx:value="grupoBtn" />
-                           </styleClass>
-                        </JFXButton>
-                        <JFXButton fx:id="btnLimparTransacao" layoutX="141.0" layoutY="344.0" onAction="#limparTransacao" prefHeight="34.0" prefWidth="120.0" styleClass="btn-success" stylesheets="@../css/estilo_bootstrap.css" text="Limpar" />
-                        <JFXButton fx:id="btnCancelarTransacao" layoutX="272.0" layoutY="344.0" onAction="#cancelarTransacao" prefHeight="34.0" prefWidth="120.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Cancelar">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </JFXButton>
-                     </children>
-                  </AnchorPane>
-               </content>
-          </Tab>
-            <Tab text="Itens de Venda">
-               <content>
-                  <AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="800.0">
-                     <children>
-                        <JFXDatePicker fx:id="txData1" defaultColor="#03a9f4" layoutX="14.0" layoutY="9.0" prefHeight="31.0" prefWidth="150.0" promptText="Data Venda" />
-                        <TextField fx:id="txSequencial1" layoutX="21.0" layoutY="64.0" onKeyPressed="#teclaEnterSequencial" prefHeight="25.0" prefWidth="195.0" promptText="TRNSEQ" />
-                        <Label layoutX="21.0" layoutY="44.0" text="Sequencial" />
-                        <TextField fx:id="txCaixa1" layoutX="21.0" layoutY="115.0" onKeyPressed="#teclaEnterCaixa" prefHeight="25.0" prefWidth="195.0" promptText="CXANUM" />
-                        <Label layoutX="21.0" layoutY="96.0" text="n° Caixa" />
-                        <TextField fx:id="txProcod" layoutX="21.0" layoutY="165.0" onKeyPressed="#teclaEnterProduto" prefHeight="25.0" prefWidth="195.0" promptText="PROCOD" />
-                        <Label layoutX="21.0" layoutY="146.0" text="Cod Produto" />
-                        <TextField fx:id="txProdes" layoutX="21.0" layoutY="214.0" onKeyPressed="#teclaEnterDescricao" prefHeight="25.0" prefWidth="195.0" promptText="PRODES" />
-                        <Label layoutX="21.0" layoutY="195.0" text="Descrição" />
-                        <TextField fx:id="txQuantidade" layoutX="21.0" layoutY="263.0" onKeyPressed="#teclaEnterQuantidade" prefHeight="25.0" prefWidth="109.0" promptText="Fracionado Ex:1.5" />
-                        <Label layoutX="21.0" layoutY="244.0" text="Quantidade" />
-                        <TextField fx:id="txVlrUnitario" layoutX="142.0" layoutY="263.0" onKeyPressed="#teclaEnterValorUnitario" prefHeight="25.0" prefWidth="74.0" promptText="ITVVLRUNI" />
-                        <Label layoutX="140.0" layoutY="244.0" text="Valor Unitario" />
-                        <TextField fx:id="txDesconto1" layoutX="22.0" layoutY="313.0" onKeyPressed="#teclaEnterDesconto" prefHeight="25.0" prefWidth="109.0" promptText="ITVVLRACR" />
-                        <Label layoutX="22.0" layoutY="294.0" text="Desconto" />
-                        <TextField fx:id="txAcrecimo1" layoutX="142.0" layoutY="314.0" onKeyPressed="#teclaEnterAcrecimo" prefHeight="25.0" prefWidth="74.0" promptText="ITVVLRDCN" />
-                        <Label layoutX="142.0" layoutY="294.0" text="Acrecimo" />
-                        <TextField fx:id="txVlrItem" layoutX="23.0" layoutY="362.0" onKeyPressed="#teclaEnterValorItem" prefHeight="25.0" prefWidth="109.0" promptText="ITVVLRTOT" />
-                        <Label layoutX="23.0" layoutY="343.0" text="Valor Item" />
-                        <JFXComboBox fx:id="cbTributacao" layoutX="142.0" layoutY="362.0" prefHeight="25.0" prefWidth="74.0" />
-                        <JFXCheckBox fx:id="ckItemCancelado" layoutX="13.0" layoutY="393.0" text="Item cancelado" />
-                        <JFXButton fx:id="btnInserirItem" buttonType="RAISED" layoutX="21.0" layoutY="425.0" onAction="#inserirItem" onKeyPressed="#teclaEnterBtnInserir" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Item" />
-                        <JFXButton fx:id="btnRemoverItem" layoutX="21.0" layoutY="475.0" onAction="#removerItem" onKeyPressed="#teclaEnterBtnRemover" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Item" />
-                        <TableView fx:id="tbItens" layoutX="226.0" layoutY="63.0" prefHeight="446.0" prefWidth="569.0">
-                           <columns>
-                              <TableColumn fx:id="procutoCol" prefWidth="111.0" text="Produto" />
-                              <TableColumn fx:id="descricaoCol" prefWidth="266.0" text="Descrição" />
-                              <TableColumn fx:id="valorUniCol" prefWidth="60.0" text="Valor Un" />
-                              <TableColumn fx:id="quantidadeCol" prefWidth="50.0" text="Quant." />
-                              <TableColumn fx:id="totalCol" prefWidth="81.0" text="Total" />
-                           </columns>
-                        </TableView>
-                        <JFXButton fx:id="btnGravarItens" buttonType="RAISED" layoutX="226.0" layoutY="19.0" onAction="#gravarItens" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Gravar Itens">
-                           <opaqueInsets>
-                              <Insets right="5.0" />
-                           </opaqueInsets>
-                        </JFXButton>
-                        <Label layoutX="544.0" layoutY="34.0" text="Total Cupom: ">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbTotalCupom" layoutX="644.0" layoutY="12.0" prefHeight="53.0" prefWidth="150.0" text="0,00">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-          <Tab text="Finalização">
-               <content>
-                  <AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="800.0">
-                     <children>
-                        <TextField fx:id="txSequencial2" layoutX="23.0" layoutY="113.0" onKeyPressed="#teclaEnterSequencial" prefHeight="25.0" prefWidth="195.0" promptText="TRNSEQ" />
-                        <JFXDatePicker fx:id="txTrndat" layoutX="23.0" layoutY="60.0" prefHeight="31.0" prefWidth="195.0" />
-                        <Label layoutX="25.0" layoutY="93.0" text="Sequencial" />
-                        <TextField fx:id="txCxanum" layoutX="23.0" layoutY="169.0" onKeyPressed="#teclaEnterSequencial" prefHeight="25.0" prefWidth="195.0" promptText="CXANUM" />
-                        <Label layoutX="25.0" layoutY="149.0" text="n° Caixa" />
-                        <TextField fx:id="txSeqFinalizadora" layoutX="23.0" layoutY="225.0" onKeyPressed="#teclaEnterSequencial" prefHeight="25.0" prefWidth="195.0" />
-                        <Label layoutX="25.0" layoutY="205.0" text="Seq. Finalizadora" />
-                        <JFXComboBox fx:id="cbFinalizadora" layoutX="22.0" layoutY="262.0" prefHeight="25.0" prefWidth="195.0" promptText="Finalizadora" />
-                        <TextField fx:id="txVlrRecebido" layoutX="24.0" layoutY="321.0" onKeyPressed="#teclaEnterValorRecebido" prefHeight="25.0" prefWidth="195.0" />
-                        <Label layoutX="26.0" layoutY="301.0" text="Valor Recebido" />
-                        <JFXButton fx:id="btnInserirFinalizacao" buttonType="RAISED" layoutX="25.0" layoutY="412.0" onAction="#inserirFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Finalizadora" />
-                        <JFXButton fx:id="btnRemoverFinalizacao" layoutX="25.0" layoutY="462.0" onAction="#removerFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Finalizadora" />
-                        <TextField fx:id="txTroco" layoutX="24.0" layoutY="374.0" onKeyPressed="#teclaEnterTroco" prefHeight="25.0" prefWidth="195.0" />
-                        <Label layoutX="26.0" layoutY="354.0" text="Troco" />
-                        <TableView fx:id="tbFinalizacao" layoutX="230.0" layoutY="114.0" prefHeight="385.0" prefWidth="562.0">
-                           <columns>
-                              <TableColumn prefWidth="64.0" text="Seq" />
-                              <TableColumn prefWidth="335.0" text="Finalizadora" />
-                              <TableColumn minWidth="0.0" prefWidth="78.0" text="Recebido" />
-                              <TableColumn prefWidth="84.0" text="Troco" />
-                           </columns>
-                        </TableView>
-                        <JFXButton fx:id="btnGravarFinalização" buttonType="RAISED" layoutX="232.0" layoutY="69.0" onAction="#gravarFinalizacao" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Gravar Finalização">
-                           <opaqueInsets>
-                              <Insets right="5.0" />
-                           </opaqueInsets>
-                        </JFXButton>
-                        <Label layoutX="526.0" layoutY="83.0" text="Total Finalização: ">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lbTotalFinalizacao" layoutX="640.0" layoutY="61.0" prefHeight="53.0" prefWidth="150.0" text="0,00">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+                              <JFXComboBox fx:id="cbTrnImpressora" layoutX="339.0" layoutY="183.0" prefHeight="25.0" prefWidth="244.0" promptText="Selecione a Impressora" />
+                              <JFXComboBox fx:id="cbTrnTipoTransacao" layoutX="598.0" layoutY="183.0" prefHeight="25.0" prefWidth="189.0" promptText="Selecione o Tipo Transação" />
+                              <TitledPane expanded="false" layoutX="301.0" layoutY="113.0" prefHeight="72.0" prefWidth="272.0" text="Cupom Fiscal Eletronico (CF-e)">
+                                 <content>
+                                    <GridPane prefHeight="55.0" prefWidth="266.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="64.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="186.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="SAT">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Chave CF-e" GridPane.rowIndex="1" />
+                                          <TextField fx:id="txChaveSat" onKeyPressed="#teclaEnterTrnSatChave" prefHeight="25.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </content>
+                              </TitledPane>
+                              <TitledPane expanded="false" layoutX="301.0" layoutY="78.0" text="Nota Fiscal Eletronica (NFC-e)">
+                                 <content>
+                                    <GridPane prefHeight="157.0" prefWidth="270.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="92.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="10.0" prefWidth="178.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="N° NFC-e" GridPane.rowIndex="1" />
+                                          <Label text="Chave NFC-e" GridPane.rowIndex="2" />
+                                          <Label text="Protocolo" GridPane.rowIndex="3" />
+                                          <TextField fx:id="txNfceNum" onKeyPressed="#teclaEnterTrnNfceNum" promptText="TRNNFCENUM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="txNfceChave" onKeyPressed="#teclaEnterTrnNfceChave" promptText="TRNNFCECHVNFE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="txNfceProtocolo" onKeyPressed="#teclaEnterTrnNfceProt" promptText="TRNNFCENUMPROT" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <Label layoutX="10.0" layoutY="62.0" text="N° Série" GridPane.rowIndex="4" />
+                                          <TextField fx:id="txNfceNumSerie" layoutX="102.0" layoutY="58.0" onKeyPressed="#teclaEnterTrnNfceSerie" promptText="TRNNFCESER" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label text="NFC-e">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </GridPane>
+                                 </content>
+                              </TitledPane>
+                              <JFXCheckBox fx:id="rdTrnLogVarejo" layoutX="595.0" layoutY="74.0" text="Envia Para Varejo Facil" />
+                              <JFXCheckBox fx:id="rdTrnLogMilenio" layoutX="595.0" layoutY="113.0" text="Envia Para Milenio" />
+                              <JFXCheckBox fx:id="rdTrnMovEstoque" layoutX="595.0" layoutY="154.0" selected="true" text="Atualiza Estoque" />
+                              <Label layoutX="302.0" layoutY="292.0" text="Valor" />
+                              <TextField fx:id="txTrnValor" layoutX="339.0" layoutY="288.0" onKeyPressed="#teclaEnterTrnValor" prefHeight="25.0" prefWidth="95.0" promptText="TRNVLR" />
+                              <Label layoutX="452.0" layoutY="292.0" text="Desconto" />
+                              <TextField fx:id="txTrnDesconto" layoutX="512.0" layoutY="288.0" onKeyPressed="#teclaEnterTrnDesconto" prefHeight="25.0" prefWidth="95.0" promptText="TRNDCN" />
+                              <Label layoutX="632.0" layoutY="292.0" text="Acrecimo" />
+                              <TextField fx:id="txTrnAcrecimo" layoutX="691.0" layoutY="288.0" onKeyPressed="#teclaEnterTrnAcrecimo" prefHeight="25.0" prefWidth="95.0" promptText="TRNACR" />
+                              <JFXButton fx:id="btnTrnLimparCampos" layoutX="17.0" layoutY="354.0" onAction="#LimparCamposTransacao" prefHeight="34.0" prefWidth="34.0" text=" ">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../imagens/broom.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+                  <Tab fx:id="tabItens" text="Itens de Venda">
+                     <content>
+                        <AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="800.0">
+                           <children>
+                              <TextField fx:id="txItemProcod" layoutX="21.0" layoutY="49.0" onKeyPressed="#teclaEnterItemProcod" prefHeight="25.0" prefWidth="195.0" promptText="PROCOD" />
+                              <Label layoutX="21.0" layoutY="30.0" text="Cod Produto" />
+                              <TextField fx:id="txItemProdes" layoutX="21.0" layoutY="98.0" onKeyPressed="#teclaEnterItemDescricao" prefHeight="25.0" prefWidth="195.0" promptText="PRODES" />
+                              <Label layoutX="21.0" layoutY="79.0" text="Descrição" />
+                              <TextField fx:id="txItemQuantidade" layoutX="21.0" layoutY="147.0" onKeyPressed="#teclaEnterItemQuantidade" prefHeight="25.0" prefWidth="109.0" promptText="Fracionado Ex:1.5" />
+                              <Label layoutX="21.0" layoutY="128.0" text="Quantidade" />
+                              <TextField fx:id="txItemVlrUnitario" layoutX="142.0" layoutY="147.0" onKeyPressed="#teclaEnterItemVlrUnit" prefHeight="25.0" prefWidth="74.0" promptText="ITVVLRUNI" />
+                              <Label layoutX="140.0" layoutY="128.0" text="Valor Unitario" />
+                              <TextField fx:id="txItemDesconto" layoutX="22.0" layoutY="197.0" onKeyPressed="#teclaEnterItemDesconto" prefHeight="25.0" prefWidth="109.0" promptText="ITVVLRACR" />
+                              <Label layoutX="22.0" layoutY="178.0" text="Desconto" />
+                              <TextField fx:id="txItemAcrecimo" layoutX="142.0" layoutY="198.0" onKeyPressed="#teclaEnterItemAcrecimo" prefHeight="25.0" prefWidth="74.0" promptText="ITVVLRDCN" />
+                              <Label layoutX="142.0" layoutY="178.0" text="Acrecimo" />
+                              <TextField fx:id="txItemValorTot" layoutX="23.0" layoutY="246.0" onKeyPressed="#teclaEnterItemVlrTotal" prefHeight="25.0" prefWidth="109.0" promptText="ITVVLRTOT" />
+                              <Label layoutX="23.0" layoutY="227.0" text="Valor Item" />
+                              <JFXComboBox fx:id="cbItemTributacao" layoutX="142.0" layoutY="246.0" prefHeight="25.0" prefWidth="74.0" />
+                              <JFXCheckBox fx:id="ckItemCancelado" layoutX="13.0" layoutY="277.0" text="Item cancelado" />
+                              <JFXButton fx:id="btnInserirItem" buttonType="RAISED" layoutX="21.0" layoutY="309.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Item" />
+                              <JFXButton fx:id="btnRemoverItem" layoutX="21.0" layoutY="359.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Item" />
+                              <TableView fx:id="tbItens" layoutX="226.0" layoutY="48.0" prefHeight="446.0" prefWidth="569.0">
+                                 <columns>
+                                    <TableColumn fx:id="procutoCol" prefWidth="111.0" text="Produto" />
+                                    <TableColumn fx:id="descricaoCol" prefWidth="266.0" text="Descrição" />
+                                    <TableColumn fx:id="valorUniCol" prefWidth="60.0" text="Valor Un" />
+                                    <TableColumn fx:id="quantidadeCol" prefWidth="50.0" text="Quant." />
+                                    <TableColumn fx:id="totalCol" prefWidth="81.0" text="Total" />
+                                 </columns>
+                              </TableView>
+                              <Label layoutX="544.0" layoutY="22.0" text="Total Cupom: ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbTotalItemCupom" layoutX="644.0" prefHeight="53.0" prefWidth="150.0" text="0,00">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                <Tab fx:id="tabFinalizacao" text="Finalização">
+                     <content>
+                        <AnchorPane id="AnchorPane" prefHeight="535.0" prefWidth="800.0">
+                           <children>
+                              <TextField fx:id="txFinSeqFinalizadora" layoutX="23.0" layoutY="59.0" onKeyPressed="#teclaEnterFinSeqFin" prefHeight="25.0" prefWidth="195.0" />
+                              <Label layoutX="25.0" layoutY="39.0" text="Seq. Finalizadora" />
+                              <JFXComboBox fx:id="cbFinFinalizadora" layoutX="22.0" layoutY="96.0" onKeyPressed="#teclaEnterFinComboFinalizadora" prefHeight="25.0" prefWidth="195.0" promptText="Finalizadora" />
+                              <TextField fx:id="txFinVlrRecebido" layoutX="24.0" layoutY="155.0" onKeyPressed="#teclaEnterFinVlrRecebido" prefHeight="25.0" prefWidth="195.0" />
+                              <Label layoutX="26.0" layoutY="135.0" text="Valor Recebido" />
+                              <JFXButton fx:id="btnInserirFinalizadora" buttonType="RAISED" layoutX="25.0" layoutY="246.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Inserir Finalizadora" />
+                              <JFXButton fx:id="btnRemoverFinalizadora" layoutX="25.0" layoutY="296.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-danger" stylesheets="@../css/estilo_bootstrap.css" text="Remover Finalizadora" />
+                              <TextField fx:id="txFinTroco" layoutX="24.0" layoutY="208.0" onKeyPressed="#teclaEnterFinTroco" prefHeight="25.0" prefWidth="195.0" />
+                              <Label layoutX="26.0" layoutY="188.0" text="Troco" />
+                              <TableView fx:id="tbFinalizacao" layoutX="230.0" layoutY="57.0" prefHeight="437.0" prefWidth="562.0">
+                                <columns>
+                                  <TableColumn fx:id="seq" prefWidth="64.0" text="Seq" />
+                                  <TableColumn fx:id="finalizadora" prefWidth="335.0" text="Finalizadora" />
+                                    <TableColumn fx:id="recebido" minWidth="0.0" prefWidth="78.0" text="Recebido" />
+                                    <TableColumn fx:id="troco" prefWidth="84.0" text="Troco" />
+                                </columns>
+                              </TableView>
+                              <JFXButton fx:id="btnGravarCupom" buttonType="RAISED" layoutX="232.0" layoutY="12.0" prefHeight="34.0" prefWidth="195.0" styleClass="btn-primary" stylesheets="@../css/estilo_bootstrap.css" text="Gravar Cupom">
+                                 <opaqueInsets>
+                                    <Insets right="5.0" />
+                                 </opaqueInsets>
+                              </JFXButton>
+                              <Label layoutX="526.0" layoutY="26.0" text="Total Finalização: ">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="lbTotalFinalizacao" layoutX="640.0" layoutY="4.0" prefHeight="53.0" prefWidth="150.0" text="0,00">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

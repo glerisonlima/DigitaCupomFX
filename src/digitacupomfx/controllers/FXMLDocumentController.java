@@ -53,7 +53,7 @@ public class FXMLDocumentController implements Initializable {
         FXMLLoader load = new FXMLLoader();
         load.setLocation(FXMLCupomController.class.getResource("/digitacupomfx/viwes/FXMLCupom.fxml"));
         this.pane.getChildren().clear();
-        this.pane.getChildren().addAll((AnchorPane) load.load());      
+        this.pane.getChildren().addAll((StackPane) load.load());      
     }
 
     @FXML
@@ -69,7 +69,7 @@ public class FXMLDocumentController implements Initializable {
         FXMLLoader load = new FXMLLoader();
         load.setLocation(FXMLFinalizacaoController.class.getResource("/digitacupomfx/viwes/FXMLFinalizacao.fxml"));
         this.pane.getChildren().clear();
-        this.pane.getChildren().addAll((StackPane) load.load());
+        this.pane.getChildren().addAll((AnchorPane) load.load());
     }
 
     @FXML

@@ -181,38 +181,35 @@ public class FXMLItensController implements Initializable {
         txQuantidade.requestFocus();
         }
     }
-    
+
     @FXML
-    void teclaEnterProcod(KeyEvent event) {
-        if(event.getCode() == KeyCode.ENTER) { 
+    public void teclaEnterProduto(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {  
             String pro = txProcod.getText();
             txProcod.setText(StringUtils.leftPad(pro, 14, "0"));
-            String procod = txProcod.getText();
-            if(!txProcod.getText().isEmpty()){
-                
-                ItenvdaDao dao = new ItenvdaDao();
-                Produto p = dao.buscarProdutoCodigo(procod);
-                if(p.getPreco() != null){
-                    txProdes.setText(p.getDescricao());
-                    txProcod.setText(p.getCodigo());
-                    txVlrUnitario.setText(p.getPreco().toString());
-                }else{
-                    p = dao.buscarProdutoCodBarras(txProcod.getText());
-                    txProdes.setText(p.getDescricao());
-                    txProcod.setText(p.getCodigo());
-                    txVlrUnitario.setText(p.getPreco().toString());            
-                }
-               
-            } 
+            try{
+            ItenvdaDao dao = new ItenvdaDao();
+            Produto p = dao.buscarProdutoCodigo(txProcod.getText());
+            if(p.getPreco() != null){
+                txProdes.setText(p.getDescricao());
+                txProcod.setText(p.getCodigo());
+                txVlrUnitario.setText(p.getPreco().toString());
+            }else{
+                p = dao.buscarProdutoCodBarras(txProcod.getText());
+                txProdes.setText(p.getDescricao());
+                txProcod.setText(p.getCodigo());
+                txVlrUnitario.setText(p.getPreco().toString());            
+            }
             txQuantidade.setText("1");
             txQuantidade.requestFocus();
-            System.out.println("valor: "+procod );
-            System.out.println("valor: "+pro );
+            }catch(Exception e){
+                txProcod.requestFocus();
+                mensagemAlerta("Produto não localizado!", "Tente novamente com um codigo de barras ou codigo principal valido. Erro: "+e.getMessage());
+                
+            }
             
         }
     }
-
-    
 
     @FXML
     public void teclaEnterQuantidade(KeyEvent event) {
@@ -287,10 +284,8 @@ public class FXMLItensController implements Initializable {
             dao.insereItenvda(item);
         }
         
-        
-            if(limparCampos()){
+        limparCampos();
             mensagemConfirma("Inserido itens de venda", "Itens de venda inseridos com sucesso!");
-            }
         }
         }catch(Exception e){
             mensagemAlerta("Erro ao tentar inserir os itens de venda", "Erro: "+e.getMessage());
@@ -344,7 +339,6 @@ public class FXMLItensController implements Initializable {
         txVlrUnitario.setText("0,00");
         
         txProcod.requestFocus();
-        
                 
         }else{
             mensagemAlerta("Erro ao inserir item", "Verifique se os campos estão vazios!");
@@ -419,7 +413,7 @@ public class FXMLItensController implements Initializable {
     }
     
     
-    private boolean limparCampos(){
+    private void limparCampos(){
         for (int i=0; i<=listItens.size();i++){
             listItens.remove(i);
             ObservableListItens.remove(i);
@@ -434,12 +428,8 @@ public class FXMLItensController implements Initializable {
         txVlrItem.setText("");
         txVlrUnitario.setText("");
         cbTributacao.getSelectionModel().clearSelection();
-        calcularCupomTabela();
-        if(listItens.isEmpty()){
-            return true;
-        }else{
-            return false;
-        }
+        
+        
         
     }
     
