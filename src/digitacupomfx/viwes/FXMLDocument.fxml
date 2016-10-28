@@ -9,15 +9,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digitacupomfx.controllers.FXMLDocumentController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="digitacupomfx.controllers.FXMLDocumentController">
    <top>
-      <AnchorPane prefHeight="50.0" prefWidth="600.0" style="-fx-background-color: #03A9F4;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="60.0" prefWidth="900.0" style="-fx-background-color: #03A9F4;" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="377.0" layoutY="9.0" text="Digita Cupom" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
+            <ImageView fitHeight="50.0" fitWidth="200.0" layoutX="12.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/index.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
    </top>
    <left>
@@ -82,6 +87,48 @@
       <AnchorPane prefHeight="15.0" prefWidth="600.0" style="-fx-background-color: #03A9F4;" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffffff;" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffffff;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="83.0" fitWidth="192.0" layoutX="143.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/logo_easyassist.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="83.0" fitWidth="124.0" layoutX="203.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/logo_mixfiscal.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="83.0" fitWidth="124.0" layoutX="504.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/logo_spedDoc.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="83.0" fitWidth="124.0" layoutX="355.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/logo_syspdv.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="83.0" fitWidth="124.0" layoutX="554.0" layoutY="217.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/milenio_logo_segmentos.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="83.0" fitWidth="124.0" layoutX="336.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/sitef_conciliacao_segmento.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="83.0" fitWidth="124.0" layoutX="547.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/varejofacil_logo_segmento_240x130.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="83.0" fitWidth="124.0" layoutX="126.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagens/sitef_segmento.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
    </center>
 </BorderPane>

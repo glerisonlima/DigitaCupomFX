@@ -11,12 +11,14 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import digitacupomfx.dao.EstoqueMovimentacaoDAO;
 import digitacupomfx.dao.FinalizacaoDAO;
 import digitacupomfx.dao.FinalizadoraDAO;
 import digitacupomfx.dao.ImpressoraDAO;
 import digitacupomfx.dao.ItenvdaDao;
 import digitacupomfx.dao.TipoTransacaoDAO;
 import digitacupomfx.dao.TransacaoDAO;
+import digitacupomfx.entidades.Estoque;
 import digitacupomfx.entidades.Finalizacao;
 import digitacupomfx.entidades.Finalizadora;
 import digitacupomfx.entidades.Impressora;
@@ -475,26 +477,43 @@ public class FXMLCupomController implements Initializable {
         t.setTxVersao(dao.versao());    
         
         //Enviando objeto para cadastro no dao
-        dao.cadastrar(t);
+        if(dao.cadastrar(t)){
+            ItenvdaDao daoItem = new ItenvdaDao();
+            for(int i=0; i < listItens.size(); i++){
+                Itenvda item = listItens.get(i);
+                item.setItvseq(String.valueOf(i+1));
+                daoItem.insereItenvda(item);
+                if(t.getRdMovEstoque() == "S"){
+                Estoque est = new Estoque();
+                est.setLoccod("01");
+                est.setMovdat(item.getTxtrndat());
+                est.setMovdoc("CupomDigitado");
+                est.setMovprc("N");
+                if(ckItemCancelado.isSelected()){
+                    est.setMovqtd(item.getTxitenquant().toString());
+                }else{
+                    est.setMovqtd("-"+item.getTxitenquant());
+                }
+                est.setMovtip("V");
+                est.setProcod(item.getTxprocod());
+                EstoqueMovimentacaoDAO daoEstoque = new EstoqueMovimentacaoDAO();
+                daoEstoque.movEstoque(est);
+                }
+            }
+
+
+            FinalizacaoDAO daoFin = new FinalizacaoDAO();
+            for(int i=0; i < listFinalizacao.size(); i++){
+                Finalizacao fin = listFinalizacao.get(i);
+                daoFin.insereFinalizacao(fin);
+            }
+            mensagemConfirma("Cadastro de Cupom", "Cupom cadastrado com sucesso!");
+            limparTodososCampo();
+        }else{
+            mensagemAlerta("Ocorreu um erro ao inserir Transação", "Contact o administrador do sistema");
+        }              
         
         
-        ItenvdaDao daoItem = new ItenvdaDao();
-        for(int i=0; i < listItens.size(); i++){
-            Itenvda item = listItens.get(i);
-            item.setItvseq(String.valueOf(i+1));
-            daoItem.insereItenvda(item);
-        }
-        
-        
-        FinalizacaoDAO daoFin = new FinalizacaoDAO();
-        for(int i=0; i < listFinalizacao.size(); i++){
-            Finalizacao fin = listFinalizacao.get(i);
-            daoFin.insereFinalizacao(fin);
-        }
-        
-        mensagemConfirma("Cadastro de Cupom", "Cupom cadastrado com sucesso!");
-        
-        limparTodososCampo();
         }catch(Exception e){
             mensagemAlerta("Ocorreu um erro ao inserir Transação", "Erro: "+e.getMessage());
         }

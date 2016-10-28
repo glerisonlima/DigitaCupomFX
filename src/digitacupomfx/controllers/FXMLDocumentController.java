@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -47,6 +48,8 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private AnchorPane pane;
+    
+    
 
     @FXML
     void AbrirCupom(ActionEvent event) throws IOException {
@@ -69,7 +72,7 @@ public class FXMLDocumentController implements Initializable {
         FXMLLoader load = new FXMLLoader();
         load.setLocation(FXMLFinalizacaoController.class.getResource("/digitacupomfx/viwes/FXMLFinalizacao.fxml"));
         this.pane.getChildren().clear();
-        this.pane.getChildren().addAll((AnchorPane) load.load());
+        this.pane.getChildren().addAll((StackPane) load.load());
     }
 
     @FXML
@@ -93,7 +96,7 @@ public class FXMLDocumentController implements Initializable {
         FXMLLoader load = new FXMLLoader();
         load.setLocation(FXMLUtilitariosController.class.getResource("/digitacupomfx/viwes/FXMLUtilitarios.fxml"));
         this.pane.getChildren().clear();
-        this.pane.getChildren().addAll((AnchorPane) load.load());
+        this.pane.getChildren().addAll((StackPane) load.load());
     }
     
     public void LimparTela(String caminho) throws IOException{

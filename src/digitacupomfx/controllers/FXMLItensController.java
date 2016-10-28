@@ -12,7 +12,9 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import digitacupomfx.DigitaCupomFx;
+import digitacupomfx.dao.EstoqueMovimentacaoDAO;
 import digitacupomfx.dao.ItenvdaDao;
+import digitacupomfx.entidades.Estoque;
 import digitacupomfx.entidades.Itenvda;
 import digitacupomfx.entidades.Produto;
 import digitacupomfx.entidades.Tributacao;
@@ -32,6 +34,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -275,21 +279,63 @@ public class FXMLItensController implements Initializable {
     
     @FXML
     public void gravarItens(ActionEvent event) {
-        try{
-        if(listItens != null){
-        ItenvdaDao dao = new ItenvdaDao();
-        for(int i=0; i < listItens.size(); i++){
-            Itenvda item = listItens.get(i);
-            item.setItvseq(String.valueOf(i+1));
-            dao.insereItenvda(item);
-        }
+        Alert dialog = new Alert(Alert.AlertType.CONFIRMATION);
+        ButtonType btnSim = new ButtonType("Sim");
+        ButtonType btnNao = new ButtonType("Não");
+        dialog.setTitle("Estoque movimentação");
+        dialog.setContentText("Você deseja movimentar estoque dos produtos ?");
+        dialog.getButtonTypes().setAll(btnSim, btnNao);
+        dialog.showAndWait().ifPresent(b -> {
+                if (b == btnSim) {
+                    try{
+                        if(listItens != null){
+                        ItenvdaDao dao = new ItenvdaDao();
+                        for(int i=0; i < listItens.size(); i++){
+                            Itenvda item = listItens.get(i);
+                            item.setItvseq(String.valueOf(i+1));
+                            dao.insereItenvda(item);
+                            Estoque est = new Estoque();
+                            est.setLoccod("01");
+                            est.setMovdat(item.getTxtrndat());
+                            est.setMovdoc("CupomDigitado");
+                            est.setMovprc("N");
+                            if(ckItemCancelado.isSelected()){
+                                est.setMovqtd(item.getTxitenquant().toString());
+                            }else{
+                                est.setMovqtd("-"+item.getTxitenquant());
+                            }
+                            est.setMovtip("V");
+                            est.setProcod(item.getTxprocod());
+                            EstoqueMovimentacaoDAO daoEstoque = new EstoqueMovimentacaoDAO();
+                            daoEstoque.movEstoque(est);
+                        }
+
+                        limparCampos();
+                            mensagemConfirma("Inserido itens de venda", "Itens de venda inseridos com sucesso!");
+                        }
+                        }catch(Exception e){
+                            mensagemAlerta("Erro ao tentar inserir os itens de venda", "Erro: "+e.getMessage());
+                        }
+                } else {
+                    try{
+                        if(listItens != null){
+                        ItenvdaDao dao = new ItenvdaDao();
+                        for(int i=0; i < listItens.size(); i++){
+                            Itenvda item = listItens.get(i);
+                            item.setItvseq(String.valueOf(i+1));
+                            dao.insereItenvda(item);
+                        }
+
+                        limparCampos();
+                            mensagemConfirma("Inserido itens de venda", "Itens de venda inseridos com sucesso!");
+                        }
+                        }catch(Exception e){
+                            mensagemAlerta("Erro ao tentar inserir os itens de venda", "Erro: "+e.getMessage());
+                        }
+                }
+            });
+       
         
-        limparCampos();
-            mensagemConfirma("Inserido itens de venda", "Itens de venda inseridos com sucesso!");
-        }
-        }catch(Exception e){
-            mensagemAlerta("Erro ao tentar inserir os itens de venda", "Erro: "+e.getMessage());
-        }
     }
     
     
@@ -428,7 +474,7 @@ public class FXMLItensController implements Initializable {
         txVlrItem.setText("");
         txVlrUnitario.setText("");
         cbTributacao.getSelectionModel().clearSelection();
-        
+        calcularCupomTabela();
         
         
     }

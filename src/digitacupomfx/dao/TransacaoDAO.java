@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class TransacaoDAO {
     
-    public void cadastrar(Transacao transacao){
+    public boolean cadastrar(Transacao transacao){
         try {           
             
             Connection conn  = new ConnectionFatory().getConection();
@@ -60,8 +60,10 @@ public class TransacaoDAO {
             pst.execute();
             pst.close();     
             conn.close();
+            return true;
         } catch (SQLException ex) {
-            Logger.getLogger(TransacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro ao cadastrar transação! Erro: "+ex.getMessage());
+            return false;            
         }
     }
     
