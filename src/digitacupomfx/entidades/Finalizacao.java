@@ -10,9 +10,11 @@ import java.math.BigDecimal;
 
 
 public class Finalizacao {
-    private String FZDCOD, FZDSEQ, AGECOD, FZDTRCCTR, TRNSEQ, CXANUM, TRNDAT;
+    private String FZDCOD, FZDSEQ, AGECOD, FZDTRCCTR, TRNSEQ, CXANUM, TRNDAT,SEQFZD;
     private String FZDDES;
-    private BigDecimal FZDVLR, FZDTRO;
+    private BigDecimal FZDVLR, FZDTRO,FZDCTRVAL;
+    
+    
     
     
 
@@ -107,6 +109,34 @@ public class Finalizacao {
      */
     public void setFZDTRO(BigDecimal FZDTRO) {
         this.FZDTRO = FZDTRO;
+    }
+
+    /**
+     * @return the SEQFZD
+     */
+    public String getSEQFZD() {
+        return SEQFZD;
+    }
+
+    /**
+     * @param SEQFZD the SEQFZD to set
+     */
+    public void setSEQFZD(String SEQFZD) {
+        this.SEQFZD = SEQFZD;
+    }
+
+    /**
+     * @return the FZDCTRVAL
+     */
+    public BigDecimal getFZDCTRVAL() {
+        return FZDCTRVAL;
+    }
+
+    /**
+     * @param FZDCTRVAL the FZDCTRVAL to set
+     */
+    public void setFZDCTRVAL(BigDecimal FZDCTRVAL) {
+        this.FZDCTRVAL = FZDCTRVAL;
     }
     
     

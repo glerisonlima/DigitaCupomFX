@@ -144,7 +144,8 @@ public class FXMLFinalizacaoController implements Initializable {
         finalizacao.setFZDDES(cbFinalizadora.getValue().toString().substring(4));
         finalizacao.setFZDVLR(new BigDecimal(txVlrRecebido.getText().replace(",", ".")));
         finalizacao.setFZDTRO(new BigDecimal(txTroco.getText().replace(",", ".")));
-        
+        finalizacao.setSEQFZD(txSeqFinalizadora.getText());
+        finalizacao.setFZDCTRVAL(new BigDecimal(txTroco.getText().replaceAll(",", ".")));
         preencherTabela(finalizacao);
         calcularFinalizacaoTabela();
         }else{

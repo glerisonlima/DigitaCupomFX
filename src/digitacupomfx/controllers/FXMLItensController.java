@@ -45,6 +45,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javax.swing.JOptionPane;
@@ -214,6 +216,37 @@ public class FXMLItensController implements Initializable {
             
         }
     }
+    
+    
+    
+    @FXML
+    void mouseCliquedQuantidade(MouseEvent event) {
+        System.out.println("Mouse Clicado");
+        if(!txProcod.getText().equals("")){
+            String pro = txProcod.getText();
+            txProcod.setText(StringUtils.leftPad(pro, 14, "0"));
+            try{
+            ItenvdaDao dao = new ItenvdaDao();
+            Produto p = dao.buscarProdutoCodigo(txProcod.getText());
+            if(p.getPreco() != null){
+                txProdes.setText(p.getDescricao());
+                txProcod.setText(p.getCodigo());
+                txVlrUnitario.setText(p.getPreco().toString());
+            }else{
+                p = dao.buscarProdutoCodBarras(txProcod.getText());
+                txProdes.setText(p.getDescricao());
+                txProcod.setText(p.getCodigo());
+                txVlrUnitario.setText(p.getPreco().toString());            
+            }
+            txQuantidade.setText("1");
+            txQuantidade.requestFocus();
+            }catch(Exception e){
+                txProcod.requestFocus();
+                mensagemAlerta("Produto não localizado!", "Tente novamente com um codigo de barras ou codigo principal valido. Erro: "+e.getMessage());
+                
+            }
+        }
+    }
 
     @FXML
     public void teclaEnterQuantidade(KeyEvent event) {
@@ -259,7 +292,7 @@ public class FXMLItensController implements Initializable {
 
     @FXML
     public void teclaEnterValorItem(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) { 
+        if (event.getCode() == KeyCode.ENTER) {             
             if(txVlrItem.getText().equals("")){
                 txVlrItem.setText("0,00");
             }
@@ -272,6 +305,13 @@ public class FXMLItensController implements Initializable {
        if (event.getCode() == KeyCode.ENTER) { 
             if(txVlrUnitario.getText().equals("")){
                 txVlrUnitario.setText("0,00");
+            }
+            if(!txQuantidade.equals("")){          
+            BigDecimal quantidade = new BigDecimal(txQuantidade.getText());
+            BigDecimal vlrUnitario = new BigDecimal(txVlrUnitario.getText().replace(",", "."));
+            BigDecimal novoVlr = casasDecimais(2, vlrUnitario.multiply(quantidade));
+            txVlrUnitario.setText(novoVlr.toString().replace(".", ","));
+            txVlrItem.setText(novoVlr.toString().replace(".", ","));
             }
             txDesconto.requestFocus();
         }     

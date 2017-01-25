@@ -20,6 +20,7 @@ import digitacupomfx.entidades.Transacao;
 import digitacupomfx.utils.MaskFieldUtil;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -185,12 +186,20 @@ public class FXMLTransacaoController implements Initializable {
             t.setRdMovEstoque("N");
         }
         t.setTxTrntrf("A");
+        
         t.setTxVersao(dao.versao());    
         
         //Enviando objeto para cadastro no dao
-        dao.cadastrar(t);
-            mensagemConfirma("Cadastro de Transação", "Transação cadastrada com sucesso!");
-            limparCamposTransacao();
+        if(buscaTransacao(txSequencial.getText(),txCaixa.getText(),txData.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00.000")))==true){
+        
+        dao.cadastrar(t); 
+        mensagemConfirma("Cadastro de Transação", "Transação cadastrada com sucesso!");
+        limparCamposTransacao();
+        }else{
+        mensagemAlerta("Cadastro de Transação", "Opa parece que esta transação ja esta cadastrada :(");
+        }
+        
+            
         }catch(Exception e){
             mensagemAlerta("Ocorreu um erro ao inserir Transação", "Erro: "+e.getMessage());
         }
@@ -499,5 +508,14 @@ public class FXMLTransacaoController implements Initializable {
         txNomeFuncionario.setText("");
         
               
+    }
+
+    private boolean buscaTransacao(String seq, String cxa, String data) {
+        TransacaoDAO dao = new TransacaoDAO();
+        if (dao.buscaTransacao(seq, cxa,data)==true){
+        return true;
+        }else{
+        return false;
+        }
     }
 }

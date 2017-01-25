@@ -53,6 +53,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import org.apache.commons.lang3.StringUtils;
@@ -431,6 +432,15 @@ public class FXMLCupomController implements Initializable {
 
     }
     
+    private boolean buscaTransacao(String seq, String cxa, String data) {
+        TransacaoDAO dao = new TransacaoDAO();
+        if (dao.buscaTransacao(seq, cxa,data)==true){
+        return true;
+        }else{
+        return false;
+        }
+    }
+    
     @FXML
     void gravarCupom(ActionEvent event) {
         
@@ -477,41 +487,47 @@ public class FXMLCupomController implements Initializable {
         t.setTxVersao(dao.versao());    
         
         //Enviando objeto para cadastro no dao
-        if(dao.cadastrar(t)){
-            ItenvdaDao daoItem = new ItenvdaDao();
-            for(int i=0; i < listItens.size(); i++){
-                Itenvda item = listItens.get(i);
-                item.setItvseq(String.valueOf(i+1));
-                daoItem.insereItenvda(item);
-                if(t.getRdMovEstoque() == "S"){
-                Estoque est = new Estoque();
-                est.setLoccod("01");
-                est.setMovdat(item.getTxtrndat());
-                est.setMovdoc("CupomDigitado");
-                est.setMovprc("N");
-                if(ckItemCancelado.isSelected()){
-                    est.setMovqtd(item.getTxitenquant().toString());
-                }else{
-                    est.setMovqtd("-"+item.getTxitenquant());
+        if(buscaTransacao(txTrnSequencial.getText(),txTrnCaixa.getText(),txTrnData.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00:00.000")))==true){
+
+            if(dao.cadastrar(t)){
+                ItenvdaDao daoItem = new ItenvdaDao();
+                for(int i=0; i < listItens.size(); i++){
+                    Itenvda item = listItens.get(i);
+                    item.setItvseq(String.valueOf(i+1));
+                    daoItem.insereItenvda(item);
+                    if(t.getRdMovEstoque() == "S"){
+                    Estoque est = new Estoque();
+                    est.setLoccod("01");
+                    est.setMovdat(item.getTxtrndat());
+                    est.setMovdoc("CupomDigitado");
+                    est.setMovprc("N");
+                    if(ckItemCancelado.isSelected()){
+                        est.setMovqtd(item.getTxitenquant().toString());
+                    }else{
+                        est.setMovqtd("-"+item.getTxitenquant());
+                    }
+                    est.setMovtip("V");
+                    est.setProcod(item.getTxprocod());
+                    EstoqueMovimentacaoDAO daoEstoque = new EstoqueMovimentacaoDAO();
+                    daoEstoque.movEstoque(est);
+                    }
                 }
-                est.setMovtip("V");
-                est.setProcod(item.getTxprocod());
-                EstoqueMovimentacaoDAO daoEstoque = new EstoqueMovimentacaoDAO();
-                daoEstoque.movEstoque(est);
-                }
-            }
 
 
-            FinalizacaoDAO daoFin = new FinalizacaoDAO();
-            for(int i=0; i < listFinalizacao.size(); i++){
-                Finalizacao fin = listFinalizacao.get(i);
-                daoFin.insereFinalizacao(fin);
-            }
-            mensagemConfirma("Cadastro de Cupom", "Cupom cadastrado com sucesso!");
-            limparTodososCampo();
+                FinalizacaoDAO daoFin = new FinalizacaoDAO();
+                for(int i=0; i < listFinalizacao.size(); i++){
+                    Finalizacao fin = listFinalizacao.get(i);
+                    daoFin.insereFinalizacao(fin);
+                }
+                mensagemConfirma("Cadastro de Cupom", "Cupom cadastrado com sucesso!");
+                limparTodososCampo();
+            }else{
+                mensagemAlerta("Ocorreu um erro ao inserir Transação", "Contact o administrador do sistema");
+            }  
         }else{
-            mensagemAlerta("Ocorreu um erro ao inserir Transação", "Contact o administrador do sistema");
-        }              
+        mensagemAlerta("Cadastro de Transação", "Opa parece que esta transação ja esta cadastrada :(");
+        }
+                    
         
         
         }catch(Exception e){
@@ -580,6 +596,34 @@ public class FXMLCupomController implements Initializable {
             
         }
     }
+    
+    @FXML
+    void mouseCliquedQuantidade(MouseEvent event) {
+        if(!txItemProcod.getText().equals("")){
+            String pro = txItemProcod.getText();
+            txItemProcod.setText(StringUtils.leftPad(pro, 14, "0"));
+            try{
+            ItenvdaDao dao = new ItenvdaDao();
+            Produto p = dao.buscarProdutoCodigo(txItemProcod.getText());
+            if(p.getPreco() != null){
+                txItemProdes.setText(p.getDescricao());
+                txItemProcod.setText(p.getCodigo());
+                txItemVlrUnitario.setText(p.getPreco().toString());
+            }else{
+                p = dao.buscarProdutoCodBarras(txItemProcod.getText());
+                txItemProdes.setText(p.getDescricao());
+                txItemProcod.setText(p.getCodigo());
+                txItemVlrUnitario.setText(p.getPreco().toString());            
+            }
+            txItemQuantidade.setText("1");
+            txItemQuantidade.requestFocus();
+            }catch(Exception e){
+                txItemProdes.requestFocus();
+                mensagemAlerta("Produto não localizado!", "Tente novamente com um codigo de barras ou codigo principal valido. Erro: "+e.getMessage());
+                
+            }
+        }
+    }
 
     @FXML
     void teclaEnterItemQuantidade(KeyEvent event) {
@@ -602,7 +646,19 @@ public class FXMLCupomController implements Initializable {
 
     @FXML
     void teclaEnterItemVlrUnit(KeyEvent event) {
-
+        if (event.getCode() == KeyCode.ENTER) { 
+            if(txItemVlrUnitario.getText().equals("")){
+                txItemVlrUnitario.setText("0,00");
+            }
+            if(!txItemQuantidade.equals("")){          
+            BigDecimal quantidade = new BigDecimal(txItemQuantidade.getText());
+            BigDecimal vlrUnitario = new BigDecimal(txItemVlrUnitario.getText().replace(",", "."));
+            BigDecimal novoVlr = casasDecimais(2, vlrUnitario.multiply(quantidade));
+            txItemVlrUnitario.setText(novoVlr.toString().replace(".", ","));
+            txItemValorTot.setText(novoVlr.toString().replace(".", ","));
+            }
+            txItemDesconto.requestFocus();
+        }
     }
 
     @FXML

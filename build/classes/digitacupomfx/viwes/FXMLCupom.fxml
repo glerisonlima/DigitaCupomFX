@@ -178,7 +178,7 @@
                               <Label layoutX="21.0" layoutY="30.0" text="Cod Produto" />
                               <TextField fx:id="txItemProdes" layoutX="21.0" layoutY="98.0" onKeyPressed="#teclaEnterItemDescricao" prefHeight="25.0" prefWidth="195.0" promptText="PRODES" />
                               <Label layoutX="21.0" layoutY="79.0" text="Descrição" />
-                              <TextField fx:id="txItemQuantidade" layoutX="21.0" layoutY="147.0" onKeyPressed="#teclaEnterItemQuantidade" prefHeight="25.0" prefWidth="109.0" promptText="Fracionado Ex:1.5" />
+                              <TextField fx:id="txItemQuantidade" layoutX="21.0" layoutY="147.0" onKeyPressed="#teclaEnterItemQuantidade" onMouseClicked="#mouseCliquedQuantidade" prefHeight="25.0" prefWidth="109.0" promptText="Fracionado Ex:1.5" />
                               <Label layoutX="21.0" layoutY="128.0" text="Quantidade" />
                               <TextField fx:id="txItemVlrUnitario" layoutX="142.0" layoutY="147.0" onKeyPressed="#teclaEnterItemVlrUnit" prefHeight="25.0" prefWidth="74.0" promptText="ITVVLRUNI" />
                               <Label layoutX="140.0" layoutY="128.0" text="Valor Unitario" />

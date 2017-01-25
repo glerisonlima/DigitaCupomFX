@@ -129,6 +129,30 @@ public class TransacaoDAO {
         }
         return funcionario;
     }
+
+    public boolean buscaTransacao(String seq, String cxa, String data) {
+        boolean retorno=true;
+        try {
+            Connection conn  = new ConnectionFatory().getConection();
+            String sql = "SELECT trnseq FROM transacao WHERE trnseq=? and cxanum=? and trndat=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, seq);
+            pst.setString(2, cxa);
+            pst.setString(3, data);
+            ResultSet rs = pst.executeQuery();            
+            if(rs.next()){
+            retorno = false;
+            }
+            pst.execute();
+            pst.close();     
+            conn.close();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(TransacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Retorno = "+retorno);
+        return retorno;
+    }
     
     
     

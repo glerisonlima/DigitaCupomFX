@@ -103,11 +103,11 @@ public abstract class MaskFieldUtil {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 String value = textField.getText();
                 value = value.replaceAll("[^0-9]", "");
-                value = value.replaceAll("([0-9]{1})([0-9]{14})$", "$1.$2");
-                value = value.replaceAll("([0-9]{1})([0-9]{11})$", "$1.$2");
-                value = value.replaceAll("([0-9]{1})([0-9]{8})$", "$1.$2");
-                value = value.replaceAll("([0-9]{1})([0-9]{5})$", "$1.$2");
-                value = value.replaceAll("([0-9]{1})([0-9]{2})$", "$1,$2");
+               // value = value.replaceAll("([0-9]{1})([0-9]{14})$", "$1.$2");
+                //value = value.replaceAll("([0-9]{1})([0-9]{11})$", "$1.$2");
+               // value = value.replaceAll("([0-9]{1})([0-9]{8})$", "$1.$2");
+              //  value = value.replaceAll("([0-9]{1})([0-9]{5})$", "$1.$2");
+               value = value.replaceAll("([0-9]{1})([0-9]{2})$", "$1,$2");
                 textField.setText(value);
                 positionCaret(textField);
 
